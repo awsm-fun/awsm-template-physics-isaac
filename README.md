@@ -152,10 +152,12 @@ first load.
 
 ## Credits
 
-- Franka Panda and ANYmal-D USD assets: NVIDIA Isaac Sim 5.0 asset library
-  (the robots' own licenses apply; see NVIDIA's Isaac Sim asset terms).
+- **Franka Panda** (Apache-2.0) and **ANYmal-D** (BSD-3-Clause, ANYbotics AG),
+  converted from the NVIDIA Isaac Sim 5.0 asset library. The licenses and the
+  changes made are in [`media/ASSET-LICENSES.md`](media/ASSET-LICENSES.md).
 - Basis Universal transcoder (Apache-2.0), vendored at `web/vendor/basis`.
 
 ## License
 
-MIT OR Apache-2.0, for the template's own code.
+MIT OR Apache-2.0, for the template's own code. The robot assets keep their
+own licenses (above).

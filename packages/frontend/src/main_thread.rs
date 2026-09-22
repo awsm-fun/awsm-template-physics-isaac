@@ -44,7 +44,7 @@ pub fn start() -> Result<(), JsValue> {
         }))
         .child(html!("div", {
             .class("hud")
-            .text("physics-isaac — Isaac Sim robots in awsm-renderer\ndrag: orbit · wheel: zoom\n")
+            .text("physics-isaac — Isaac Sim robots in awsm-renderer\ndrag: orbit · wheel: zoom\nrobots: Franka Panda (Apache-2.0) · ANYmal-D (BSD-3, © ANYbotics AG) — see ASSET-LICENSES.md\n")
             .child(html!("div", {
                 .text_signal(source.signal_cloned())
             }))
