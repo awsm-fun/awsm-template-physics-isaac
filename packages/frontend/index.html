@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>physics-isaac — Awsm · Isaac robots · wasm threads</title>
+
+    <!-- COOP/COEP shim for static hosts (GitHub Pages) that can't send the
+         headers `crossOriginIsolated` needs. Must run before the wasm bundle.
+         No-op when the server already isolates the page (Trunk / `task dev`). -->
+    <script src="coi-serviceworker.js"></script>
+    <link data-trunk rel="copy-file" href="coi-serviceworker.js" />
+
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; background: #0b0d12; color: #cdd3e0; font-family: system-ui, sans-serif; overflow: hidden; }
+        /* The DOM (canvas + HUD) is built from Rust with Dominator — see
+           src/main_thread.rs. These classes are its styling hooks. */
+        .canvas { display: block; width: 100vw; height: 100vh; touch-action: none; }
+        .hud { position: fixed; top: 10px; left: 12px; right: 12px; font-size: 13px; line-height: 1.5; white-space: pre-wrap; color: #f4f7fb; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75); pointer-events: none; }
+        .hud .key { color: #7fd1ff; }
+        .hud-error { color: #ff8a80; font-weight: 600; }
+
+        /* Loading screen: static so it shows while the wasm downloads. Rust
+           appends progress lines to #loading-log and fades it on Ready. */
+        #loading { position: fixed; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; background: radial-gradient(120% 120% at 50% 20%, #141a26 0%, #0b0d12 60%, #06070a 100%); transition: opacity 0.5s ease; }
+        #loading.done { opacity: 0; pointer-events: none; }
+        #loading .title { font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: #e8edf7; text-align: center; line-height: 1.5; }
+        #loading .title b { color: #76b900; font-weight: 600; }
+        #loading .subtitle { display: block; margin-top: 6px; font-size: 13px; letter-spacing: 0.3em; color: #7f8ba1; }
+        #loading .orb { width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle at 32% 30%, #ffffff 0%, #b8c4d6 18%, #2a3242 70%, #0b0d12 100%); box-shadow: 0 0 24px rgba(118, 185, 0, 0.35); animation: loading-bounce 1.1s cubic-bezier(0.28, 0, 0.55, 1) infinite alternate; }
+        @keyframes loading-bounce { from { transform: translateY(-16px) scale(1); } to { transform: translateY(10px) scale(0.94, 1.06); } }
+        #loading-log { width: min(620px, 86vw); height: 200px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; line-height: 1.6; color: #7f8ba1; mask-image: linear-gradient(to bottom, transparent 0%, black 35%); }
+        #loading-log div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        #loading-log div:last-child { color: #b9e3ff; }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="orb"></div>
+        <div class="title">
+            <div><b>Awsm</b> Renderer</div>
+            <div><b>Isaac</b> Robots</div>
+            <span class="subtitle">wasm threads</span>
+        </div>
+        <div id="loading-log"><div>loading code… (fetching + compiling the wasm bundle)</div></div>
+    </div>
+    <!-- wasm-opt stays off: it can strip the shared-memory import the threaded
+         bootstrap needs. -->
+    <link data-trunk rel="rust" data-wasm-opt="0" />
+
+    <!-- Basis transcoder + worker for the bundle's KTX2 textures, same-origin
+         (COEP require-corp). The URLs are built in render_thread.rs. -->
+    <link data-trunk rel="copy-file" href="../../web/vendor/basis/basis_transcoder.js" data-target-path="vendor/basis" />
+    <link data-trunk rel="copy-file" href="../../web/vendor/basis/basis_transcoder.wasm" data-target-path="vendor/basis" />
+    <link data-trunk rel="copy-file" href="../../web/workers/basis-worker.js" data-target-path="workers" />
+
+    <!-- The pose SOURCE: replays captures or reads ?stream=ws://… into the
+         shared pose block (see the file header). -->
+    <link data-trunk rel="copy-file" href="../../web/workers/pose-worker.js" data-target-path="workers" />
+
+    <!-- The editor's player export (the robots, imported from the Isaac
+         exporter's GLB + .mujoco.json) served at /bundle/, and the recorded
+         joint sweeps the replay source loops, served at /captures/. -->
+    <link data-trunk rel="copy-dir" href="../../media/bundle" />
+    <link data-trunk rel="copy-dir" href="../../media/captures" />
+</body>
+</html>

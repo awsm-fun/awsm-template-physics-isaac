@@ -1,0 +1,8457 @@
+name = "untitled.awsm"
+custom_materials = []
+animations = []
+
+[environment]
+skybox = "built_in_default"
+specular = "built_in_default"
+irradiance = "built_in_default"
+
+[environment.probe]
+enabled = false
+center = [
+    0.0,
+    0.0,
+    0.0,
+]
+half_extents = [
+    10.0,
+    10.0,
+    10.0,
+]
+
+[environment.stream]
+skybox = []
+specular = []
+irradiance = []
+
+[environment.rotation]
+skybox = [
+    0.0,
+    0.0,
+    0.0,
+]
+specular = [
+    0.0,
+    0.0,
+    0.0,
+]
+irradiance = [
+    0.0,
+    0.0,
+    0.0,
+]
+
+[shadows]
+sscs_enabled = false
+sscs_step_count = 16
+sscs_step_world = 0.03999999910593033
+sscs_thickness = 0.05000000074505806
+sscs_directional_darkening = 0.3499999940395355
+sscs_punctual_darkening = 0.8999999761581421
+atlas_size = 4096
+evsm_atlas_size = 2048
+evsm_exponent = 10.0
+evsm_blur_radius = 6
+max_point_shadows = 8
+point_shadow_resolution = 1024
+debug_cascade_colors = false
+
+[post_process]
+tonemapping = "khronos_neutral_pbr"
+bloom = false
+dof = false
+exposure = 0.0
+bloom_threshold = 1.0
+bloom_knee = 0.5
+bloom_intensity = 1.0
+bloom_scatter = 1.0
+
+[post_process.ssr]
+enabled = false
+intensity = 1.0
+max_distance = 100.0
+thickness = 1.0
+max_steps = 96
+spread_cutoff = 0.6000000238418579
+edge_fade = 0.03999999910593033
+resolution_scale = 0.5
+temporal = false
+temporal_weight = 0.8999999761581421
+bvh_reflections = false
+
+[post_process.atmosphere]
+mode = "off"
+color = [
+    0.5,
+    0.6000000238418579,
+    0.699999988079071,
+]
+density = 0.019999999552965164
+base_height = 0.0
+height_falloff = 0.0
+scattering_anisotropy = 0.30000001192092896
+volumetric_distance = 80.0
+volumetric_temporal = false
+
+[assets.357124cf-e13c-423c-94f2-0c982a4eee30]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.357124cf-e13c-423c-94f2-0c982a4eee30.source]
+mesh = "glb"
+
+[assets.0cea5b8a-f624-4073-b5f5-f4f5a995aad2]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.0cea5b8a-f624-4073-b5f5-f4f5a995aad2.source]
+mesh = "glb"
+
+[assets.48e87e95-5afb-4d16-b373-13eb0780732b]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.48e87e95-5afb-4d16-b373-13eb0780732b.source.texture.raster]
+display_name = "hip-be5905b8.jpg"
+color_kind = "albedo"
+
+[assets.9aeacf59-a266-4516-ac48-5155d4bfc5f8]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.9aeacf59-a266-4516-ac48-5155d4bfc5f8.source]
+mesh = "glb"
+
+[assets.4bbf5c9f-237a-4b09-aa69-69f0861db917]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.4bbf5c9f-237a-4b09-aa69-69f0861db917.source]
+mesh = "glb"
+
+[assets.fa450df0-0fe1-4ec7-ab5c-3427ab6aa70d]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.fa450df0-0fe1-4ec7-ab5c-3427ab6aa70d.source]
+mesh = "glb"
+
+[assets.f607c14c-2ca8-4a1c-a5c3-a4118b75519b]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.f607c14c-2ca8-4a1c-a5c3-a4118b75519b.source]
+mesh = "glb"
+
+[assets.c77e4981-55a8-4713-a166-b7ca27d7851e]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.c77e4981-55a8-4713-a166-b7ca27d7851e.source]
+mesh = "glb"
+
+[assets.b8b2ab91-dfda-4c3e-9032-a058ebce17b7]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.b8b2ab91-dfda-4c3e-9032-a058ebce17b7.source]
+mesh = "glb"
+
+[assets.b00c2e42-fa48-4bfd-9fd4-f2bb0e0749d1]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.b00c2e42-fa48-4bfd-9fd4-f2bb0e0749d1.source]
+mesh = "glb"
+
+[assets.70320aff-9c78-4233-8d87-cb54608ef745]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.70320aff-9c78-4233-8d87-cb54608ef745.source]
+mesh = "glb"
+
+[assets.57d724d1-b6b2-4a63-b563-b235aea3dd49]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.57d724d1-b6b2-4a63-b563-b235aea3dd49.source]
+mesh = "glb"
+
+[assets.df87cc50-dbce-46f3-84a4-50086bc63526]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.df87cc50-dbce-46f3-84a4-50086bc63526.source]
+mesh = "glb"
+
+[assets.8f8766d9-b2c3-4a2d-a4bd-be93a49f0660]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.8f8766d9-b2c3-4a2d-a4bd-be93a49f0660.source]
+mesh = "glb"
+
+[assets.b9a6ac76-2b9c-48a9-9808-ba2ed11311ba]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.b9a6ac76-2b9c-48a9-9808-ba2ed11311ba.source]
+mesh = "glb"
+
+[assets.cf910f61-1d48-4e5c-ab07-2bc9ded256ab]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.cf910f61-1d48-4e5c-ab07-2bc9ded256ab.source.texture.raster]
+display_name = "shank-400f2987.jpg"
+color_kind = "albedo"
+
+[assets.627d5de3-8510-4ecc-859f-a6b11488018a]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.627d5de3-8510-4ecc-859f-a6b11488018a.source]
+mesh = "glb"
+
+[assets.9ad8f6d1-e54f-4e7a-ba27-e93a93b2b7d9]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.9ad8f6d1-e54f-4e7a-ba27-e93a93b2b7d9.source]
+mesh = "glb"
+
+[assets.d6a9515a-ecae-40be-9ca6-7a8e96ff5c92]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.d6a9515a-ecae-40be-9ca6-7a8e96ff5c92.source.texture.raster]
+display_name = "base-e3a6fe11.jpg"
+color_kind = "albedo"
+
+[assets.31f85cd0-df3a-41b5-bec3-84a65e6a60b5]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.31f85cd0-df3a-41b5-bec3-84a65e6a60b5.source.texture.raster]
+display_name = "battery-dc2968cc.jpg"
+color_kind = "albedo"
+
+[assets.8ae1b984-944a-401f-babb-dfed443cbd74]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.8ae1b984-944a-401f-babb-dfed443cbd74.source.texture.raster]
+display_name = "thigh-bd152dbc.jpg"
+color_kind = "albedo"
+
+[assets.bfcc9f97-6f4a-4863-838e-6a6b575c37da]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.bfcc9f97-6f4a-4863-838e-6a6b575c37da.source]
+mesh = "glb"
+
+[assets.eb66536e-0ce3-445e-9da6-1ff23c2585a1]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.eb66536e-0ce3-445e-9da6-1ff23c2585a1.source]
+mesh = "glb"
+
+[assets.1d854b28-3926-4771-9f40-881cd256c0d0]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.1d854b28-3926-4771-9f40-881cd256c0d0.source]
+mesh = "glb"
+
+[assets.e5e4b3e4-2163-42a7-80e0-9bf6a605862a]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.e5e4b3e4-2163-42a7-80e0-9bf6a605862a.source]
+mesh = "glb"
+
+[assets.d94d8b4b-b701-4acf-8a43-9008127026a1]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.d94d8b4b-b701-4acf-8a43-9008127026a1.source]
+mesh = "glb"
+
+[assets.ff66ff31-097a-4c31-a55c-a194da9bcdb0]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.ff66ff31-097a-4c31-a55c-a194da9bcdb0.source]
+mesh = "glb"
+
+[assets.e5d5c2a1-1d29-4b17-8b1a-d26cf7f475d8]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.e5d5c2a1-1d29-4b17-8b1a-d26cf7f475d8.source]
+mesh = "glb"
+
+[assets.6312b22b-2f99-4824-96d0-94681ff97252]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.6312b22b-2f99-4824-96d0-94681ff97252.source]
+mesh = "glb"
+
+[assets.046a18cc-fce0-4498-a362-7f397a8e3636]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.046a18cc-fce0-4498-a362-7f397a8e3636.source]
+mesh = "glb"
+
+[assets.82fbdaf6-95a2-45ed-abdb-31594d0bc980]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.82fbdaf6-95a2-45ed-abdb-31594d0bc980.source]
+mesh = "glb"
+
+[assets.c644d98c-d359-4939-9e96-3c188637bacb]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.c644d98c-d359-4939-9e96-3c188637bacb.source]
+mesh = "glb"
+
+[assets.c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2.source.texture.raster]
+display_name = "drive-bcf0cd84.jpg"
+color_kind = "albedo"
+
+[assets.ec6f1ea0-a6ac-4570-a955-c455c437b918]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.ec6f1ea0-a6ac-4570-a955-c455c437b918.source]
+mesh = "glb"
+
+[assets.3eee2106-3e47-4883-ae54-f3a8cc159634]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.3eee2106-3e47-4883-ae54-f3a8cc159634.source]
+mesh = "glb"
+
+[assets.ed079108-1694-4643-b3c2-f3f6588f717e]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.ed079108-1694-4643-b3c2-f3f6588f717e.source]
+mesh = "glb"
+
+[assets.5d363447-9993-44cc-aac4-ac711ddadcac]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.5d363447-9993-44cc-aac4-ac711ddadcac.source]
+mesh = "glb"
+
+[assets.2b0091dc-eea3-477a-9e15-71959225341f]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.2b0091dc-eea3-477a-9e15-71959225341f.source]
+mesh = "glb"
+
+[assets.35745375-84f1-463b-b7d2-8721bacb8f49]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.35745375-84f1-463b-b7d2-8721bacb8f49.source]
+mesh = "glb"
+
+[assets.c90234e8-46be-4ea1-9389-bcefee4fea7b]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.c90234e8-46be-4ea1-9389-bcefee4fea7b.source]
+mesh = "glb"
+
+[assets.94fc3029-af98-44ba-8c4b-af6960125faf]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.94fc3029-af98-44ba-8c4b-af6960125faf.source]
+mesh = "glb"
+
+[assets.901c904d-86a1-4c9b-9d53-589b6ff3f316]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.901c904d-86a1-4c9b-9d53-589b6ff3f316.source]
+mesh = "glb"
+
+[assets.0ef4a252-1bd3-4dbe-a9a3-24fa8589bac6]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.0ef4a252-1bd3-4dbe-a9a3-24fa8589bac6.source]
+mesh = "glb"
+
+[assets.7a8d3db1-1cf8-4e92-a4ef-3a98545f0cc1]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.7a8d3db1-1cf8-4e92-a4ef-3a98545f0cc1.source]
+mesh = "glb"
+
+[assets.def2f736-268b-4d97-bec8-44d1f8d101ff]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.def2f736-268b-4d97-bec8-44d1f8d101ff.source.texture.raster]
+display_name = "top_shell-59696c6f.jpg"
+color_kind = "albedo"
+
+[assets.04eb2aa2-f8da-4f93-a8a8-608589410733]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.04eb2aa2-f8da-4f93-a8a8-608589410733.source]
+mesh = "glb"
+
+[assets.c773cfd7-a88a-4f17-9647-923564c342eb]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.c773cfd7-a88a-4f17-9647-923564c342eb.source]
+mesh = "glb"
+
+[assets.fb058639-7beb-44f2-b08b-b6008d1e0da6]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.fb058639-7beb-44f2-b08b-b6008d1e0da6.source]
+mesh = "glb"
+
+[assets.940e3031-cd90-4997-8215-59d377a037ff]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.940e3031-cd90-4997-8215-59d377a037ff.source]
+mesh = "glb"
+
+[assets.9d1055e9-7173-4f21-affc-2511e8f557a3]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.9d1055e9-7173-4f21-affc-2511e8f557a3.source]
+mesh = "glb"
+
+[assets.b01f0621-a72a-4258-a1ff-14e37b1f8042]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.b01f0621-a72a-4258-a1ff-14e37b1f8042.source.texture.raster]
+display_name = "lidar_guard-a65c64db.jpg"
+color_kind = "albedo"
+
+[assets.3ef3fedc-e2af-488b-b0ce-df528ee8ef70]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.3ef3fedc-e2af-488b-b0ce-df528ee8ef70.source]
+mesh = "glb"
+
+[assets.58c9a102-be8b-424f-9ac3-c79c65923b34]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.58c9a102-be8b-424f-9ac3-c79c65923b34.source]
+mesh = "glb"
+
+[assets.19c814c4-1725-49f2-9fd8-fef1a2b62ee1]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.19c814c4-1725-49f2-9fd8-fef1a2b62ee1.source]
+mesh = "glb"
+
+[assets.c70412b5-410c-40d6-8d97-85e96fb036ae]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.c70412b5-410c-40d6-8d97-85e96fb036ae.source]
+mesh = "glb"
+
+[assets.a76f9459-1f77-4cae-873f-48d7de3d8a61]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.a76f9459-1f77-4cae-873f-48d7de3d8a61.source]
+mesh = "glb"
+
+[assets.ad098ae5-3ee1-4c80-9c25-2e2c8544c368]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.ad098ae5-3ee1-4c80-9c25-2e2c8544c368.source]
+mesh = "glb"
+
+[assets.2669130b-cf58-4d92-b4bf-7646472b0e3b]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.2669130b-cf58-4d92-b4bf-7646472b0e3b.source]
+mesh = "glb"
+
+[assets.ce3c1f30-7524-4a1a-a967-a85c049fb077]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.ce3c1f30-7524-4a1a-a967-a85c049fb077.source.texture.raster]
+display_name = "foot-0617ab4a.jpg"
+color_kind = "albedo"
+
+[assets.8757e038-913d-414e-b00d-977e8599118a]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.8757e038-913d-414e-b00d-977e8599118a.source]
+mesh = "glb"
+
+[assets.7564818c-8d5f-490e-ad15-9f0e04cff13f]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.7564818c-8d5f-490e-ad15-9f0e04cff13f.source]
+mesh = "glb"
+
+[assets.173fe917-6195-4e5b-a375-b0858b4500ec]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.173fe917-6195-4e5b-a375-b0858b4500ec.source]
+mesh = "glb"
+
+[assets.f7d93916-0989-4fca-a458-89ad4c0c5c08]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.f7d93916-0989-4fca-a458-89ad4c0c5c08.source]
+mesh = "glb"
+
+[assets.12cce5b3-075c-4848-bb08-ec8a5ab8cfc0]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.12cce5b3-075c-4848-bb08-ec8a5ab8cfc0.source]
+mesh = "glb"
+
+[assets.00000000-0000-4000-8000-000000000001]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.00000000-0000-4000-8000-000000000001.source.mesh.primitive.plane]
+width = 3.5999999046325684
+depth = 2.4000000953674316
+segments_x = 1
+segments_z = 1
+
+[assets.b1776a3c-098b-40f4-9ee9-72b1db24ad71]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.b1776a3c-098b-40f4-9ee9-72b1db24ad71.source.texture.raster]
+display_name = "face_shell-edd52422.jpg"
+color_kind = "albedo"
+
+[assets.c1deff84-264c-45ad-91b8-7d5eb34b79fe]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.c1deff84-264c-45ad-91b8-7d5eb34b79fe.source]
+mesh = "glb"
+
+[assets.8f17e13f-3403-4048-8c69-f03151ac8e4a]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.8f17e13f-3403-4048-8c69-f03151ac8e4a.source]
+mesh = "glb"
+
+[assets.7cd4273f-b936-4a9c-a6ae-a7162df13620]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.7cd4273f-b936-4a9c-a6ae-a7162df13620.source]
+mesh = "glb"
+
+[assets.215419f8-0dec-4e41-89bd-529f9b69c8e9]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.215419f8-0dec-4e41-89bd-529f9b69c8e9.source]
+mesh = "glb"
+
+[assets.661e12ec-4853-474c-a695-e45e392e6a5e]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.661e12ec-4853-474c-a695-e45e392e6a5e.source.texture.raster]
+display_name = "lidar-cf9fba85.jpg"
+color_kind = "albedo"
+
+[assets.cfd0d356-e6a2-457f-9751-a0a81cf7ac51]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.cfd0d356-e6a2-457f-9751-a0a81cf7ac51.source]
+mesh = "glb"
+
+[assets.154084eb-82fd-4ce5-98d5-9d9ebc4269e7]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.154084eb-82fd-4ce5-98d5-9d9ebc4269e7.source]
+mesh = "glb"
+
+[assets.28584b6d-5815-48fa-9b0e-274661a2013a]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.28584b6d-5815-48fa-9b0e-274661a2013a.source]
+mesh = "glb"
+
+[assets.113b79da-ea95-4e6f-88a7-91c4a2d6c10f]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.113b79da-ea95-4e6f-88a7-91c4a2d6c10f.source]
+mesh = "glb"
+
+[assets.3d847357-e07c-4e47-aefc-ceeb09bc1f43]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.3d847357-e07c-4e47-aefc-ceeb09bc1f43.source]
+mesh = "glb"
+
+[assets.17211569-b696-4b4c-a7af-3f4693153d79]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.17211569-b696-4b4c-a7af-3f4693153d79.source]
+mesh = "glb"
+
+[assets.94e57eaa-f959-4d08-8c7c-700c504badc2]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.94e57eaa-f959-4d08-8c7c-700c504badc2.source.texture.raster]
+display_name = "docking_socket-8c18aa11.jpg"
+color_kind = "albedo"
+
+[assets.137359a8-15f5-41a2-af8a-bbbcc4258173]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.137359a8-15f5-41a2-af8a-bbbcc4258173.source]
+mesh = "glb"
+
+[assets.7281827b-e175-410b-b00f-13a1b4697231]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.7281827b-e175-410b-b00f-13a1b4697231.source]
+mesh = "glb"
+
+[assets.7e032ecf-04a5-4421-8e96-d6acd4860879]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.7e032ecf-04a5-4421-8e96-d6acd4860879.source]
+mesh = "glb"
+
+[assets.78776849-93ab-4077-a11f-5483bd37b60c]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.78776849-93ab-4077-a11f-5483bd37b60c.source]
+mesh = "glb"
+
+[assets.f16e7413-a719-444b-8148-09469c42e748]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.f16e7413-a719-444b-8148-09469c42e748.source.texture.raster]
+display_name = "bottom_shell-d3bd38b0.jpg"
+color_kind = "albedo"
+
+[assets.7ed3333a-dfcc-47a0-9ede-582ed21063b9]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.7ed3333a-dfcc-47a0-9ede-582ed21063b9.source]
+mesh = "glb"
+
+[assets.5cef6e13-9fd2-4642-bffe-fda3ea84d1b9]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.5cef6e13-9fd2-4642-bffe-fda3ea84d1b9.source]
+mesh = "glb"
+
+[assets.0d1a60da-d1e8-4fed-9f8c-0e47fb73a039]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.0d1a60da-d1e8-4fed-9f8c-0e47fb73a039.source]
+mesh = "glb"
+
+[assets.ad6798f2-1515-4de9-92ad-160c1792f75d]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.ad6798f2-1515-4de9-92ad-160c1792f75d.source]
+mesh = "glb"
+
+[assets.e305e988-1e23-4f49-9cd9-219b7fb193f1]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+texture_encoding = "ktx2"
+lod = "none"
+
+[assets.e305e988-1e23-4f49-9cd9-219b7fb193f1.source.texture.raster]
+display_name = "mount-f5ceea0b.jpg"
+color_kind = "albedo"
+
+[assets.9451ce74-85c0-4141-9084-304e79428479]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.9451ce74-85c0-4141-9084-304e79428479.source]
+mesh = "glb"
+
+[assets.888db881-01e9-4bb1-af68-6d34104c0977]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.888db881-01e9-4bb1-af68-6d34104c0977.source]
+mesh = "glb"
+
+[assets.cd9dc87b-27bb-48c3-b624-b080cdb2158b]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.cd9dc87b-27bb-48c3-b624-b080cdb2158b.source]
+mesh = "glb"
+
+[assets.4250b720-c2a6-4716-960d-d35f7e169d05]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.4250b720-c2a6-4716-960d-d35f7e169d05.source]
+mesh = "glb"
+
+[assets.6dc8714c-a067-491a-b632-77e68478c55b]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.6dc8714c-a067-491a-b632-77e68478c55b.source]
+mesh = "glb"
+
+[assets.3e4cf571-8900-4387-8e89-59fd41139b81]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.3e4cf571-8900-4387-8e89-59fd41139b81.source]
+mesh = "glb"
+
+[assets.cb08fb3d-1a22-46c5-a071-e6a97f1ef7fd]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.cb08fb3d-1a22-46c5-a071-e6a97f1ef7fd.source]
+mesh = "glb"
+
+[assets.d7ff4a12-626a-4452-96d0-545d0bc4942d]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.d7ff4a12-626a-4452-96d0-545d0bc4942d.source]
+mesh = "glb"
+
+[assets.1f6c6e3f-d8b0-4621-900a-1070600844c5]
+gltf_material_asset_ids = []
+gltf_image_asset_ids = []
+content_hash = ""
+lod = "none"
+
+[assets.1f6c6e3f-d8b0-4621-900a-1070600844c5.source]
+mesh = "glb"
+
+[mixer]
+layers = []
+
+[[nodes]]
+id = "95783c74-3f19-40b6-9d5f-e827ec4b4bb1"
+name = "Directional Light"
+locked = false
+visible = true
+prefab = false
+children = []
+
+[nodes.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    -0.4226182699203491,
+    0.0,
+    0.0,
+    0.9063077569007874,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.kind.light.directional]
+color = [
+    1.0,
+    1.0,
+    1.0,
+]
+intensity = 4.0
+volumetric_intensity = 1.0
+
+[nodes.kind.light.directional.shadow]
+cast = true
+depth_bias = 0.0010000000474974513
+normal_bias = 0.0
+resolution = 2048
+hardness = "soft"
+pcss_penumbra_scale = 1.0
+kernel_slack = 0.0
+shadow_samples = 16
+max_distance = 0.0
+cascade_count = 4
+cascade_split_lambda = 0.5
+evsm_cutoff = "last_cascade"
+far_cascade_update_rate = "every4_frames"
+cube_face_update_rate = "every_frame"
+
+[[nodes]]
+id = "dc951a65-f6a0-48f8-b105-9a0b1f893f2f"
+name = "panda"
+kind = "group"
+locked = false
+visible = true
+prefab = false
+
+[nodes.transform]
+translation = [
+    -0.800000011920929,
+    0.0,
+    0.0,
+]
+rotation = [
+    -0.7071067690849304,
+    0.0,
+    0.0,
+    0.7071067690849304,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.mujoco.instance]
+model_name = "panda"
+geom_count = 44
+site_count = 0
+tendon_capacity = []
+flex_vertex_counts = []
+body_count = 12
+visible_groups = [
+    0,
+    1,
+    2,
+]
+
+[nodes.mujoco.instance.source]
+filename = "franka.usd"
+sha256 = "aa480a0c26cfacedd223259bd82b0825a44f857a27769db8be1d34c3f82c6d0f"
+mujoco_version = "none (USD, awsm-renderer-isaac-export)"
+
+[[nodes.children]]
+id = "8b4e544c-b724-455d-ad8f-69085a7ab5c6"
+name = "panda_hand (Aluminum)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000004865228930839294,
+    0.9259999394416809,
+]
+rotation = [
+    0.9238795042037964,
+    0.38268354535102844,
+    0.000000001862645149230957,
+    -0.000000006559276233275568,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "215419f8-0dec-4e41-89bd-529f9b69c8e9"
+selected_variant = "d85d0ce5-80ef-4a97-a489-3482c4f6b4f1"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "d85d0ce5-80ef-4a97-a489-3482c4f6b4f1"
+name = "Aluminum"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "93b0636a-5d5b-4269-82ba-702bbf9eddcf"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "Aluminum"
+base_color = [
+    0.8999999761581421,
+    0.8999999761581421,
+    0.8999999761581421,
+    1.0,
+]
+metallic = 0.8989999890327454
+roughness = 0.10100001096725464
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 0
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "133800fb-d761-4a03-bb83-c25ae896d632"
+name = "panda_hand (PlasticWhite, subset_1)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000004865228930839294,
+    0.9259999394416809,
+]
+rotation = [
+    0.9238795042037964,
+    0.38268354535102844,
+    0.000000001862645149230957,
+    -0.000000006559276233275568,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "357124cf-e13c-423c-94f2-0c982a4eee30"
+selected_variant = "a927d468-71cb-4cd6-9796-b319955db8d8"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "a927d468-71cb-4cd6-9796-b319955db8d8"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 1
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "11c1ee59-2c61-41e4-89dd-a77c8d78a181"
+name = "panda_hand (PlasticWhite, subset_2)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000004865228930839294,
+    0.9259999394416809,
+]
+rotation = [
+    0.9238795042037964,
+    0.38268354535102844,
+    0.000000001862645149230957,
+    -0.000000006559276233275568,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "58c9a102-be8b-424f-9ac3-c79c65923b34"
+selected_variant = "0200208f-5897-46cb-a42e-1fd597f181e9"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "0200208f-5897-46cb-a42e-1fd597f181e9"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 2
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "c584f22a-cf58-4fd5-9b62-cb7997296131"
+name = "panda_hand (PlasticGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000004865228930839294,
+    0.9259999394416809,
+]
+rotation = [
+    0.9238795042037964,
+    0.38268354535102844,
+    0.000000001862645149230957,
+    -0.000000006559276233275568,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "888db881-01e9-4bb1-af68-6d34104c0977"
+selected_variant = "1a324f55-97a3-490f-bfbe-5ca46ddeea5b"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "1a324f55-97a3-490f-bfbe-5ca46ddeea5b"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 3
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "f415a3ab-4e55-4330-9ab7-81dcd8125912"
+name = "panda_hand (RubberGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000004865228930839294,
+    0.9259999394416809,
+]
+rotation = [
+    0.9238795042037964,
+    0.38268354535102844,
+    0.000000001862645149230957,
+    -0.000000006559276233275568,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "0d1a60da-d1e8-4fed-9f8c-0e47fb73a039"
+selected_variant = "71d7a059-e0f7-48b5-a443-8f10e76b4c82"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "71d7a059-e0f7-48b5-a443-8f10e76b4c82"
+name = "RubberGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "e178f084-c829-4b21-b612-8d73fb3a5f7b"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "RubberGray"
+base_color = [
+    0.05000000074505806,
+    0.05000000074505806,
+    0.05000000074505806,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 4
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "209eaa21-da85-4824-9a2c-c2daa8f3c01c"
+name = "panda_rightfinger (PlasticWhite)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000006914138594993346,
+    0.8676000833511353,
+]
+rotation = [
+    0.9238795042037964,
+    0.3826834559440613,
+    -0.00000000000000006197990214476952,
+    0.00000000000000006123234262925839,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "9d1055e9-7173-4f21-affc-2511e8f557a3"
+selected_variant = "198592bb-9a36-43d6-b313-6ccc297b7b28"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "198592bb-9a36-43d6-b313-6ccc297b7b28"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 5
+group = 0
+kind = "mesh"
+body = 2
+
+[[nodes.children]]
+id = "84b214ec-4949-482b-9835-d39ef10d6a44"
+name = "panda_rightfinger (RubberGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000006914138594993346,
+    0.8676000833511353,
+]
+rotation = [
+    0.9238795042037964,
+    0.3826834559440613,
+    -0.00000000000000006197990214476952,
+    0.00000000000000006123234262925839,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "9ad8f6d1-e54f-4e7a-ba27-e93a93b2b7d9"
+selected_variant = "5ba57399-7892-48c7-94a1-3ae93298ff41"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "5ba57399-7892-48c7-94a1-3ae93298ff41"
+name = "RubberGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "e178f084-c829-4b21-b612-8d73fb3a5f7b"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "RubberGray"
+base_color = [
+    0.05000000074505806,
+    0.05000000074505806,
+    0.05000000074505806,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 6
+group = 0
+kind = "mesh"
+body = 2
+
+[[nodes.children]]
+id = "7b29e109-fe69-49e4-93ec-6255b45be721"
+name = "panda_leftfinger (RubberGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799995481967926,
+    -0.000000031590460025654465,
+    0.8676000833511353,
+]
+rotation = [
+    0.9238794445991516,
+    0.382683664560318,
+    -0.000000000000000026890988241415013,
+    0.00000000000000006123234262925839,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "1f6c6e3f-d8b0-4621-900a-1070600844c5"
+selected_variant = "738e7a0e-2220-49ff-b57c-a7e6adff28f8"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "738e7a0e-2220-49ff-b57c-a7e6adff28f8"
+name = "RubberGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "e178f084-c829-4b21-b612-8d73fb3a5f7b"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "RubberGray"
+base_color = [
+    0.05000000074505806,
+    0.05000000074505806,
+    0.05000000074505806,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 7
+group = 0
+kind = "mesh"
+body = 3
+
+[[nodes.children]]
+id = "01c19332-2d61-424d-b3a0-c150dd4ce589"
+name = "panda_leftfinger (PlasticWhite)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799995481967926,
+    -0.000000031590460025654465,
+    0.8676000833511353,
+]
+rotation = [
+    0.9238794445991516,
+    0.382683664560318,
+    -0.000000000000000026890988241415013,
+    0.00000000000000006123234262925839,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "ec6f1ea0-a6ac-4570-a955-c455c437b918"
+selected_variant = "31f3f658-17cc-47b2-b21e-7b6027f88d03"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "31f3f658-17cc-47b2-b21e-7b6027f88d03"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 8
+group = 0
+kind = "mesh"
+body = 3
+
+[[nodes.children]]
+id = "7b96a412-5fed-4441-bd15-09b6a647bfc3"
+name = "panda_link0 (Aluminum, subset)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000000238418573772492,
+    0.000000000298023217215615,
+    0.00000002384185648907078,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "4250b720-c2a6-4716-960d-d35f7e169d05"
+selected_variant = "f016abef-eefc-429f-ada5-dc2b0838779f"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "f016abef-eefc-429f-ada5-dc2b0838779f"
+name = "Aluminum"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "93b0636a-5d5b-4269-82ba-702bbf9eddcf"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "Aluminum"
+base_color = [
+    0.8999999761581421,
+    0.8999999761581421,
+    0.8999999761581421,
+    1.0,
+]
+metallic = 0.8989999890327454
+roughness = 0.10100001096725464
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 9
+group = 0
+kind = "mesh"
+body = 4
+
+[[nodes.children]]
+id = "aecb4b92-7503-4bc8-b5ff-c3119515d7de"
+name = "panda_link0 (PlasticGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000000238418573772492,
+    0.000000000298023217215615,
+    0.00000002384185648907078,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "901c904d-86a1-4c9b-9d53-589b6ff3f316"
+selected_variant = "8b2754f4-2b0a-4fba-9fbe-3a0fae5b1661"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "8b2754f4-2b0a-4fba-9fbe-3a0fae5b1661"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 10
+group = 0
+kind = "mesh"
+body = 4
+
+[[nodes.children]]
+id = "58cd2511-9298-459a-884d-553363dcf13c"
+name = "panda_link0 (PlasticWhite)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000000238418573772492,
+    0.000000000298023217215615,
+    0.00000002384185648907078,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "ed079108-1694-4643-b3c2-f3f6588f717e"
+selected_variant = "f925fed2-a565-47a5-8b16-3ec8458f616b"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "f925fed2-a565-47a5-8b16-3ec8458f616b"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 11
+group = 0
+kind = "mesh"
+body = 4
+
+[[nodes.children]]
+id = "8783ebfb-9f85-4462-80a6-b4d6113a13bd"
+name = "panda_link0 (Aluminum, subset_3)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000000238418573772492,
+    0.000000000298023217215615,
+    0.00000002384185648907078,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "0ef4a252-1bd3-4dbe-a9a3-24fa8589bac6"
+selected_variant = "d3bcb9c4-8194-4c26-b45e-a61e0d1d6367"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "d3bcb9c4-8194-4c26-b45e-a61e0d1d6367"
+name = "Aluminum"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "93b0636a-5d5b-4269-82ba-702bbf9eddcf"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "Aluminum"
+base_color = [
+    0.8999999761581421,
+    0.8999999761581421,
+    0.8999999761581421,
+    1.0,
+]
+metallic = 0.8989999890327454
+roughness = 0.10100001096725464
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 12
+group = 0
+kind = "mesh"
+body = 4
+
+[[nodes.children]]
+id = "d9a39699-4b7f-4aea-9dba-d1d44864252c"
+name = "panda_link0 (PlasticBlack)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000000238418573772492,
+    0.000000000298023217215615,
+    0.00000002384185648907078,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "5cef6e13-9fd2-4642-bffe-fda3ea84d1b9"
+selected_variant = "9a3e1541-d71d-483e-b837-39c19713d170"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "9a3e1541-d71d-483e-b837-39c19713d170"
+name = "PlasticBlack"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "bf85ffd9-3860-4a85-9ac3-db28d4b93524"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticBlack"
+base_color = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.0
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 13
+group = 0
+kind = "mesh"
+body = 4
+
+[[nodes.children]]
+id = "d39797b4-e8b9-4fe6-b375-83079d2b38ed"
+name = "panda_link0 (EmissiveBlue)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000000238418573772492,
+    0.000000000298023217215615,
+    0.00000002384185648907078,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "94fc3029-af98-44ba-8c4b-af6960125faf"
+selected_variant = "4fefe2c4-9678-439f-b8c4-446e2a7b6940"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "4fefe2c4-9678-439f-b8c4-446e2a7b6940"
+name = "EmissiveBlue"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "5b525404-df97-43b2-90c6-c7eff7ac794d"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "EmissiveBlue"
+base_color = [
+    1.0,
+    0.9999899864196777,
+    0.9999899864196777,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2979999780654907
+emissive = [
+    0.0,
+    0.10000000149011612,
+    1.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 14
+group = 0
+kind = "mesh"
+body = 4
+
+[[nodes.children]]
+id = "ab0e0ed0-f95b-4fde-9b2c-e5475e683948"
+name = "panda_link1"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0000000009685754420729609,
+    0.00000012636184010261786,
+    0.3330003321170807,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "b8b2ab91-dfda-4c3e-9032-a058ebce17b7"
+selected_variant = "da798d22-bc3d-4539-9eed-b71ab15f90c4"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "da798d22-bc3d-4539-9eed-b71ab15f90c4"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 15
+group = 0
+kind = "mesh"
+body = 5
+
+[[nodes.children]]
+id = "211bb385-4e6f-4715-8bf4-1b7a719e90ad"
+name = "panda_link2"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.000000006081536163549117,
+    -0.00000011205673189351728,
+    0.3330000340938568,
+]
+rotation = [
+    0.7071069478988647,
+    -0.000000014901159417490817,
+    0.00000013597309589385986,
+    -0.7071065902709961,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "d94d8b4b-b701-4acf-8a43-9008127026a1"
+selected_variant = "7274b634-bd0c-4056-a698-6f4f9ecf0b72"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "7274b634-bd0c-4056-a698-6f4f9ecf0b72"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 16
+group = 0
+kind = "mesh"
+body = 6
+
+[[nodes.children]]
+id = "9ce20584-03ab-41df-bf30-c3e77d6038e9"
+name = "panda_link3 (PlasticWhite, subset)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000015258788721439487,
+    -0.000000057220457705398076,
+    0.6489999890327454,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "c773cfd7-a88a-4f17-9647-923564c342eb"
+selected_variant = "42d6fb17-c6c7-461f-8f7f-3d19c02c8b57"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "42d6fb17-c6c7-461f-8f7f-3d19c02c8b57"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 17
+group = 0
+kind = "mesh"
+body = 7
+
+[[nodes.children]]
+id = "9e8b50cd-0043-48ca-be3e-6917e2a57723"
+name = "panda_link3 (PlasticWhite, subset_1)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000015258788721439487,
+    -0.000000057220457705398076,
+    0.6489999890327454,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "d7ff4a12-626a-4452-96d0-545d0bc4942d"
+selected_variant = "614942bb-e385-4da2-8d75-a0f77d72e2d6"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "614942bb-e385-4da2-8d75-a0f77d72e2d6"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 18
+group = 0
+kind = "mesh"
+body = 7
+
+[[nodes.children]]
+id = "472699b5-0ea2-48df-b7f3-c7a783309acc"
+name = "panda_link3 (PlasticGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000015258788721439487,
+    -0.000000057220457705398076,
+    0.6489999890327454,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "3d847357-e07c-4e47-aefc-ceeb09bc1f43"
+selected_variant = "00fdc355-3cf7-42bb-a536-e402f4fe86fb"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "00fdc355-3cf7-42bb-a536-e402f4fe86fb"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 19
+group = 0
+kind = "mesh"
+body = 7
+
+[[nodes.children]]
+id = "a81248bb-8380-416a-8f5d-76c2c08dca40"
+name = "panda_link4 (PlasticWhite, subset)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08250007778406143,
+    0.000000057220457705398076,
+    0.6489999294281006,
+]
+rotation = [
+    0.7071073651313782,
+    -0.00000007450580596923828,
+    -0.00000015273690223693848,
+    0.7071061730384827,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "cb08fb3d-1a22-46c5-a071-e6a97f1ef7fd"
+selected_variant = "7ab52b4e-fcc5-4168-b4a0-2d17d7ae1237"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "7ab52b4e-fcc5-4168-b4a0-2d17d7ae1237"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 20
+group = 0
+kind = "mesh"
+body = 8
+
+[[nodes.children]]
+id = "bdf89ed8-fbb5-45b3-a2d1-232a640cf7bc"
+name = "panda_link4 (PlasticWhite, subset_1)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08250007778406143,
+    0.000000057220457705398076,
+    0.6489999294281006,
+]
+rotation = [
+    0.7071073651313782,
+    -0.00000007450580596923828,
+    -0.00000015273690223693848,
+    0.7071061730384827,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "137359a8-15f5-41a2-af8a-bbbcc4258173"
+selected_variant = "955bc087-6a5f-47d2-9f31-f95cf89e1f27"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "955bc087-6a5f-47d2-9f31-f95cf89e1f27"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 21
+group = 0
+kind = "mesh"
+body = 8
+
+[[nodes.children]]
+id = "1063e462-c076-439a-afb9-a153789e0d5f"
+name = "panda_link4 (PlasticGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08250007778406143,
+    0.000000057220457705398076,
+    0.6489999294281006,
+]
+rotation = [
+    0.7071073651313782,
+    -0.00000007450580596923828,
+    -0.00000015273690223693848,
+    0.7071061730384827,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "7e032ecf-04a5-4421-8e96-d6acd4860879"
+selected_variant = "a892bd1c-e116-4b5e-a216-79407290e50d"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "a892bd1c-e116-4b5e-a216-79407290e50d"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 22
+group = 0
+kind = "mesh"
+body = 8
+
+[[nodes.children]]
+id = "1999271d-aa7a-4213-9fd9-ce4be9964d77"
+name = "panda_link5 (PlasticWhite, subset)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.000000005960464122267695,
+    -0.00000024318694613612024,
+    1.0330003499984741,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "154084eb-82fd-4ce5-98d5-9d9ebc4269e7"
+selected_variant = "217402c8-f3ae-4ae7-b21c-7682e3ca6071"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "217402c8-f3ae-4ae7-b21c-7682e3ca6071"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 23
+group = 0
+kind = "mesh"
+body = 9
+
+[[nodes.children]]
+id = "3fc95400-e306-4dc2-bf80-7fc5450a0455"
+name = "panda_link5 (PlasticWhite, subset_1)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.000000005960464122267695,
+    -0.00000024318694613612024,
+    1.0330003499984741,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "3eee2106-3e47-4883-ae54-f3a8cc159634"
+selected_variant = "38b32a51-c156-4027-ab6d-11d09411e651"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "38b32a51-c156-4027-ab6d-11d09411e651"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 24
+group = 0
+kind = "mesh"
+body = 9
+
+[[nodes.children]]
+id = "8f9b4899-61d8-46f2-bdba-e65b30c2ea63"
+name = "panda_link5 (PlasticGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.000000005960464122267695,
+    -0.00000024318694613612024,
+    1.0330003499984741,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "e5e4b3e4-2163-42a7-80e0-9bf6a605862a"
+selected_variant = "4a59bb94-7953-4c4c-8273-ae8bf8fdd2ac"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "4a59bb94-7953-4c4c-8273-ae8bf8fdd2ac"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 25
+group = 0
+kind = "mesh"
+body = 9
+
+[[nodes.children]]
+id = "6aacf6db-5367-499d-9567-a99b085c0363"
+name = "panda_link6 (PlasticWhite, subset)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "7a8d3db1-1cf8-4e92-a4ef-3a98545f0cc1"
+selected_variant = "c3107552-4241-4723-ab6e-73afc828d535"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "c3107552-4241-4723-ab6e-73afc828d535"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 26
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "67645867-ca08-4a64-a15f-3f57265f1c7a"
+name = "panda_link6 (PlasticGray, subset_1)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "fa450df0-0fe1-4ec7-ab5c-3427ab6aa70d"
+selected_variant = "488f3d7a-236e-414a-a1c3-9439295fce3a"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "488f3d7a-236e-414a-a1c3-9439295fce3a"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 27
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "a9557f5e-2132-49df-a8ce-cd8faf7c030f"
+name = "panda_link6 (RubberWhite)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "c70412b5-410c-40d6-8d97-85e96fb036ae"
+selected_variant = "2facbfd5-8c8e-42b5-8511-1e0b8126e0be"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "2facbfd5-8c8e-42b5-8511-1e0b8126e0be"
+name = "RubberWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "5fa2e962-7eb1-49ff-9c4b-3a69ec9d6f05"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "RubberWhite"
+base_color = [
+    0.8999999761581421,
+    0.8999999761581421,
+    0.8999999761581421,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 28
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "9566f0b5-0186-4ba0-831e-51528fa8800a"
+name = "panda_link6 (PlasticGray, subset_11)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "9aeacf59-a266-4516-ac48-5155d4bfc5f8"
+selected_variant = "b44c0c2c-a3fa-4b1c-9925-795087216b0f"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "b44c0c2c-a3fa-4b1c-9925-795087216b0f"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 29
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "f77f3300-8767-4962-80c4-1ac08b84c643"
+name = "panda_link6 (PlasticWhite, subset_12)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "19c814c4-1725-49f2-9fd8-fef1a2b62ee1"
+selected_variant = "9b397589-6854-45f8-bc62-c1cdf9a59c9a"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "9b397589-6854-45f8-bc62-c1cdf9a59c9a"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 30
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "eb8a0947-550e-4265-adf4-bdf34b68b500"
+name = "panda_link6 (PlasticWhite, subset_13)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "6312b22b-2f99-4824-96d0-94681ff97252"
+selected_variant = "3a6f7f59-ebf6-4e38-8895-bd38468f9533"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "3a6f7f59-ebf6-4e38-8895-bd38468f9533"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 31
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "0547ce59-9666-473b-bb52-129896e4e9ba"
+name = "panda_link6 (PlasticGray, subset_2)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "c644d98c-d359-4939-9e96-3c188637bacb"
+selected_variant = "64d0f3ac-0f38-4438-b671-6b60ec628aeb"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "64d0f3ac-0f38-4438-b671-6b60ec628aeb"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 32
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "aa932f7c-7a21-4699-8c31-082ffaf27fe3"
+name = "panda_link6 (RubberRed)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "e5d5c2a1-1d29-4b17-8b1a-d26cf7f475d8"
+selected_variant = "07f0eb67-edf1-4c00-a290-3c6f82709766"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "07f0eb67-edf1-4c00-a290-3c6f82709766"
+name = "RubberRed"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "53357a82-389d-48e7-b089-29f9a37579c1"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "RubberRed"
+base_color = [
+    0.5,
+    0.0,
+    0.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 33
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "6a808ac4-9164-46a7-b473-4643f4ecf480"
+name = "panda_link6 (RubberGreen)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "3ef3fedc-e2af-488b-b0ce-df528ee8ef70"
+selected_variant = "b6926d9e-f85c-49a9-8f16-591e1b66d0b0"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "b6926d9e-f85c-49a9-8f16-591e1b66d0b0"
+name = "RubberGreen"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "3e505754-9854-4236-8f39-0bd60c979242"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "RubberGreen"
+base_color = [
+    0.0,
+    0.5,
+    0.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 34
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "0d4a9d65-bfa3-4512-bac2-12a5ebc8b667"
+name = "panda_link6 (EmissiveBlue)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "fb058639-7beb-44f2-b08b-b6008d1e0da6"
+selected_variant = "3e242f23-c4bf-4787-aad4-2783e221936e"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "3e242f23-c4bf-4787-aad4-2783e221936e"
+name = "EmissiveBlue"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "5b525404-df97-43b2-90c6-c7eff7ac794d"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "EmissiveBlue"
+base_color = [
+    1.0,
+    0.9999899864196777,
+    0.9999899864196777,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2979999780654907
+emissive = [
+    0.0,
+    0.10000000149011612,
+    1.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 35
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "fdb9a2bf-f076-49f7-b4f0-a8b5eeffd114"
+name = "panda_link6 (RubberGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "7cd4273f-b936-4a9c-a6ae-a7162df13620"
+selected_variant = "96c01a56-c8a2-4c45-9816-2504e5c50030"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "96c01a56-c8a2-4c45-9816-2504e5c50030"
+name = "RubberGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "e178f084-c829-4b21-b612-8d73fb3a5f7b"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "RubberGray"
+base_color = [
+    0.05000000074505806,
+    0.05000000074505806,
+    0.05000000074505806,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 36
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "03ceba1b-20e5-4e0d-b7d5-d1d80c4fd787"
+name = "panda_link6 (PlasticGray, subset_7)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "8f17e13f-3403-4048-8c69-f03151ac8e4a"
+selected_variant = "7b94c039-799d-4f35-a8ce-18e9119bc2ab"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "7b94c039-799d-4f35-a8ce-18e9119bc2ab"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 37
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "70cc1ac0-cf33-4c4c-a2c1-21f2486c8e31"
+name = "panda_link6 (RubberLightGray, subset_8)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "8f8766d9-b2c3-4a2d-a4bd-be93a49f0660"
+selected_variant = "b696972e-d02c-41ef-932b-403b021fc51b"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "b696972e-d02c-41ef-932b-403b021fc51b"
+name = "RubberLightGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "fa2d51dd-dbd5-48a5-a412-7a22575751ad"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "RubberLightGray"
+base_color = [
+    0.20000000298023224,
+    0.20000000298023224,
+    0.20000000298023224,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 38
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "4e237aaf-f93a-446a-8721-596728dd9b3e"
+name = "panda_link6 (RubberLightGray, subset_9)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.00000014781952017983713,
+    -0.00000004231929651155042,
+    1.032999873161316,
+]
+rotation = [
+    0.7071079015731812,
+    0.000000010477378964424133,
+    0.00000001932494342327118,
+    0.7071056365966797,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "940e3031-cd90-4997-8215-59d377a037ff"
+selected_variant = "70791e5d-b03e-47f6-ab09-6716b1e6441b"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "70791e5d-b03e-47f6-ab09-6716b1e6441b"
+name = "RubberLightGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "fa2d51dd-dbd5-48a5-a412-7a22575751ad"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "RubberLightGray"
+base_color = [
+    0.20000000298023224,
+    0.20000000298023224,
+    0.20000000298023224,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 39
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "7476cbfe-ab75-4e7a-9ad4-5290435d0df0"
+name = "panda_link7 (Aluminum, subset)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000010251998361354708,
+    1.0329999923706055,
+]
+rotation = [
+    1.0,
+    0.0,
+    0.0,
+    0.00000000000000006123234262925839,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "7ed3333a-dfcc-47a0-9ede-582ed21063b9"
+selected_variant = "f7150373-a914-4170-a206-5efe267f43ba"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "f7150373-a914-4170-a206-5efe267f43ba"
+name = "Aluminum"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "93b0636a-5d5b-4269-82ba-702bbf9eddcf"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "Aluminum"
+base_color = [
+    0.8999999761581421,
+    0.8999999761581421,
+    0.8999999761581421,
+    1.0,
+]
+metallic = 0.8989999890327454
+roughness = 0.10100001096725464
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 40
+group = 0
+kind = "mesh"
+body = 11
+
+[[nodes.children]]
+id = "c8c450d0-253c-4bbb-9e0e-289dda2792a1"
+name = "panda_link7 (PlasticGray)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000010251998361354708,
+    1.0329999923706055,
+]
+rotation = [
+    1.0,
+    0.0,
+    0.0,
+    0.00000000000000006123234262925839,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "17211569-b696-4b4c-a7af-3f4693153d79"
+selected_variant = "6f2e74b0-a5c5-40d3-9d9a-c39a8b18b023"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "6f2e74b0-a5c5-40d3-9d9a-c39a8b18b023"
+name = "PlasticGray"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "472da4d7-98b3-40b8-b479-7b7cd538cce2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticGray"
+base_color = [
+    0.10000000149011612,
+    0.10000000149011612,
+    0.10000000149011612,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.2919999957084656
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 41
+group = 0
+kind = "mesh"
+body = 11
+
+[[nodes.children]]
+id = "320c1f00-8c52-4b2b-a13c-2873bfe39b6d"
+name = "panda_link7 (PlasticWhite)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000010251998361354708,
+    1.0329999923706055,
+]
+rotation = [
+    1.0,
+    0.0,
+    0.0,
+    0.00000000000000006123234262925839,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "0cea5b8a-f624-4073-b5f5-f4f5a995aad2"
+selected_variant = "b6b2673f-33e4-47a2-801e-f68bd6422720"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "b6b2673f-33e4-47a2-801e-f68bd6422720"
+name = "PlasticWhite"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "07c1a49d-95b5-4288-8a01-10e01dbcea35"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "PlasticWhite"
+base_color = [
+    0.699999988079071,
+    0.699999988079071,
+    0.699999988079071,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.18000000715255737
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 42
+group = 0
+kind = "mesh"
+body = 11
+
+[[nodes.children]]
+id = "99780ec3-d18d-4e06-a9fb-2f49db826364"
+name = "panda_link7 (Aluminum, subset_3)"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.08799996972084045,
+    -0.00000010251998361354708,
+    1.0329999923706055,
+]
+rotation = [
+    1.0,
+    0.0,
+    0.0,
+    0.00000000000000006123234262925839,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "5d363447-9993-44cc-aac4-ac711ddadcac"
+selected_variant = "ccbffa8a-be14-4676-8132-ef22873edd47"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "ccbffa8a-be14-4676-8132-ef22873edd47"
+name = "Aluminum"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "93b0636a-5d5b-4269-82ba-702bbf9eddcf"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "Aluminum"
+base_color = [
+    0.8999999761581421,
+    0.8999999761581421,
+    0.8999999761581421,
+    1.0,
+]
+metallic = 0.8989999890327454
+roughness = 0.10100001096725464
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 43
+group = 0
+kind = "mesh"
+body = 11
+
+[[nodes]]
+id = "5c334088-a7c7-43df-8e20-7e1c323df290"
+name = "anymal"
+kind = "group"
+locked = false
+visible = true
+prefab = false
+
+[nodes.transform]
+translation = [
+    0.550000011920929,
+    0.6815000176429749,
+    0.0,
+]
+rotation = [
+    -0.7071067690849304,
+    0.0,
+    0.0,
+    0.7071067690849304,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.mujoco.instance]
+model_name = "anymal"
+geom_count = 64
+site_count = 0
+tendon_capacity = []
+flex_vertex_counts = []
+body_count = 18
+visible_groups = [
+    0,
+    1,
+    2,
+]
+
+[nodes.mujoco.instance.source]
+filename = "anymal_d.usd"
+sha256 = "12656121fa5ebc54aad1a82931a3c7885b580257cb501ff2fdb378a40e4a7af2"
+mujoco_version = "none (USD, awsm-renderer-isaac-export)"
+
+[[nodes.children]]
+id = "e9d80830-0aa9-4814-89c4-54587775a731"
+name = "base/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "c77e4981-55a8-4713-a166-b7ca27d7851e"
+selected_variant = "c560cbf9-3e4e-413d-b6ba-e1ef5f452edb"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "c560cbf9-3e4e-413d-b6ba-e1ef5f452edb"
+name = "base"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "24127717-18a0-4af1-a44b-74261d5d1f85"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "base"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "d6a9515a-ecae-40be-9ca6-7a8e96ff5c92"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 0
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "e52f9d8f-7557-4318-8301-2a8640140e2e"
+name = "base/visuals/drive/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "8757e038-913d-414e-b00d-977e8599118a"
+selected_variant = "257bb1a6-6852-4f0e-b812-a79d521d4e25"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "257bb1a6-6852-4f0e-b812-a79d521d4e25"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 1
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "ec01c446-a5c0-41bb-8477-67cc0389a4db"
+name = "base/visuals/drive_0/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "6dc8714c-a067-491a-b632-77e68478c55b"
+selected_variant = "e9db2f62-e79e-4691-9ede-15c9ff895d5a"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "e9db2f62-e79e-4691-9ede-15c9ff895d5a"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 2
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "dff22fb5-e667-4914-857d-88a351d768b4"
+name = "drive_1/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "113b79da-ea95-4e6f-88a7-91c4a2d6c10f"
+selected_variant = "255b9309-e7bc-4fed-843b-63b666426798"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "255b9309-e7bc-4fed-843b-63b666426798"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 3
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "aca52758-7bd1-449d-a9e1-aec004a4f7ee"
+name = "drive_2/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "2b0091dc-eea3-477a-9e15-71959225341f"
+selected_variant = "4ffc0bc5-fc16-41f2-948f-1b140bc8b82c"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "4ffc0bc5-fc16-41f2-948f-1b140bc8b82c"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 4
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "f1045a72-44fa-432c-b01e-a07822090b5a"
+name = "battery/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "ff66ff31-097a-4c31-a55c-a194da9bcdb0"
+selected_variant = "f84161dd-fd8f-44fa-98a6-7433aeab9521"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "f84161dd-fd8f-44fa-98a6-7433aeab9521"
+name = "battery"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "5e0c6560-383f-49b4-94ca-1d62275f5602"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "battery"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "31f85cd0-df3a-41b5-bec3-84a65e6a60b5"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 5
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "59977c51-44b6-4731-9f21-0e2a7e14cfab"
+name = "bottom_shell/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "a76f9459-1f77-4cae-873f-48d7de3d8a61"
+selected_variant = "307bc07e-d65a-4bad-9f6c-d2c1518de8ae"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "307bc07e-d65a-4bad-9f6c-d2c1518de8ae"
+name = "Default_OBJ"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "18567b8e-5031-4114-99d2-701692cb0f9c"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "Default_OBJ"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "f16e7413-a719-444b-8148-09469c42e748"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 6
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "7a2330dd-5d95-411c-afb7-2893d28f4e46"
+name = "face_shell/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "cd9dc87b-27bb-48c3-b624-b080cdb2158b"
+selected_variant = "f61369d5-4001-441c-9ad0-d60dcd9bb735"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "f61369d5-4001-441c-9ad0-d60dcd9bb735"
+name = "face_shell"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "27c47589-3d60-4783-a1c9-b81c71702a42"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "face_shell"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "b1776a3c-098b-40f4-9ee9-72b1db24ad71"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 7
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "44fcb2d4-a238-46a5-8369-c55382e6b1b7"
+name = "face_shell_0/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "9451ce74-85c0-4141-9084-304e79428479"
+selected_variant = "3627f725-62b7-49f4-8a3c-9782c3348f2d"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "3627f725-62b7-49f4-8a3c-9782c3348f2d"
+name = "face_shell"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "27c47589-3d60-4783-a1c9-b81c71702a42"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "face_shell"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "b1776a3c-098b-40f4-9ee9-72b1db24ad71"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 8
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "00b207a9-560d-4166-a20f-5cdaf3f38b39"
+name = "docking_socket/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "cfd0d356-e6a2-457f-9751-a0a81cf7ac51"
+selected_variant = "524296e2-1e33-42fe-99d3-180c9143ee23"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "524296e2-1e33-42fe-99d3-180c9143ee23"
+name = "docking_socket"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "821c68c5-f5c1-442d-b560-2a1fa0b759ed"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "docking_socket"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "94e57eaa-f959-4d08-8c7c-700c504badc2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 9
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "0c290aa3-71fe-4e60-a718-adc1bc22d626"
+name = "mount/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "b00c2e42-fa48-4bfd-9fd4-f2bb0e0749d1"
+selected_variant = "e26307b1-ca16-4683-bb25-f21cf1aaa074"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "e26307b1-ca16-4683-bb25-f21cf1aaa074"
+name = "mount"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "9c1904f8-1b97-483b-98ba-b1c05607ab3c"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "mount"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "e305e988-1e23-4f49-9cd9-219b7fb193f1"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 10
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "80a7766f-2b08-4467-ac9b-5379e070034b"
+name = "lidar/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "eb66536e-0ce3-445e-9da6-1ff23c2585a1"
+selected_variant = "916a2bd4-8973-4e22-b52f-7d329b6bb25e"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "916a2bd4-8973-4e22-b52f-7d329b6bb25e"
+name = "Velodyne"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "7144e5c6-630b-4cf1-9dac-8df518bc038a"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "Velodyne"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "661e12ec-4853-474c-a695-e45e392e6a5e"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 11
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "2f7f43b1-55f4-4e87-8557-ad7b49c19b72"
+name = "lidar_guard/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "7564818c-8d5f-490e-ad15-9f0e04cff13f"
+selected_variant = "261b3c99-63c2-483a-a2ae-31dc1c794560"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "261b3c99-63c2-483a-a2ae-31dc1c794560"
+name = "lidar_guard"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "56e3b757-007f-4cfe-bfca-f097a6f9fd7b"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "lidar_guard"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "b01f0621-a72a-4258-a1ff-14e37b1f8042"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 12
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "89dfeb4d-c4f5-4966-9376-b5751cb605f5"
+name = "top_shell/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "df87cc50-dbce-46f3-84a4-50086bc63526"
+selected_variant = "913e79fd-497a-45e2-821f-8578d477d931"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "913e79fd-497a-45e2-821f-8578d477d931"
+name = "top_shell"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b771aad5-ed6f-4843-8653-73cf4be81c90"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "top_shell"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "def2f736-268b-4d97-bec8-44d1f8d101ff"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 13
+group = 0
+kind = "mesh"
+body = 1
+
+[[nodes.children]]
+id = "3ce6358f-d069-4789-817d-ec3f66c5bf1f"
+name = "LF_HIP/visuals/hip/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.30399999022483826,
+    0.10899999737739563,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "82fbdaf6-95a2-45ed-abdb-31594d0bc980"
+selected_variant = "078c61e1-856a-40ba-a719-9669c6dd8d6e"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "078c61e1-856a-40ba-a719-9669c6dd8d6e"
+name = "hip"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "126ee703-32e8-4211-9270-8d6c0e13c5fb"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "hip"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "48e87e95-5afb-4d16-b373-13eb0780732b"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 16
+group = 0
+kind = "mesh"
+body = 2
+
+[[nodes.children]]
+id = "2e7b49e9-17c7-4f1f-bf34-e258e8efde8d"
+name = "LF_THIGH/visuals/drive/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    0.11499999463558197,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    -0.7071067690849304,
+    0.7071067690849304,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "c90234e8-46be-4ea1-9389-bcefee4fea7b"
+selected_variant = "d60f3057-7c1b-4764-ab6a-50deac0160bd"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "d60f3057-7c1b-4764-ab6a-50deac0160bd"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 17
+group = 0
+kind = "mesh"
+body = 3
+
+[[nodes.children]]
+id = "46f0b575-dc7d-4b0d-aa48-d24ff8cbfc1b"
+name = "LF_THIGH/visuals/thigh/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    0.11499999463558197,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    -0.7071067690849304,
+    0.7071067690849304,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "04eb2aa2-f8da-4f93-a8a8-608589410733"
+selected_variant = "3ae38161-3a40-4bd5-ac91-f0863a0757e8"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "3ae38161-3a40-4bd5-ac91-f0863a0757e8"
+name = "thigh"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "bd8b5d6d-87e5-4e22-ab47-8367f8c9dc4d"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "thigh"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "8ae1b984-944a-401f-babb-dfed443cbd74"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 18
+group = 0
+kind = "mesh"
+body = 3
+
+[[nodes.children]]
+id = "c8deff79-50a3-4016-946f-03fd0e7fdc65"
+name = "LF_THIGH/visuals/drive_0/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    0.11499999463558197,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    -0.7071067690849304,
+    0.7071067690849304,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "3e4cf571-8900-4387-8e89-59fd41139b81"
+selected_variant = "beaebe8a-f5c5-4227-afa4-04f9babef384"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "beaebe8a-f5c5-4227-afa4-04f9babef384"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 19
+group = 0
+kind = "mesh"
+body = 3
+
+[[nodes.children]]
+id = "871322b9-ffcd-43f6-b745-ebefbe37274c"
+name = "LF_SHANK/visuals/shank_l/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    0.2954999804496765,
+    -0.28499990701675415,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071067094802856,
+    0.7071068286895752,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "ad098ae5-3ee1-4c80-9c25-2e2c8544c368"
+selected_variant = "a53a17bf-62a3-4bf3-972f-9b020214a0ec"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "a53a17bf-62a3-4bf3-972f-9b020214a0ec"
+name = "shank"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "51a79737-3346-4c7f-8f41-65eaad7c39b5"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "shank"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "cf910f61-1d48-4e5c-ab07-2bc9ded256ab"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 23
+group = 0
+kind = "mesh"
+body = 4
+
+[[nodes.children]]
+id = "aaa32e4e-9605-412f-b15f-b3df192f2660"
+name = "LF_SHANK/visuals/foot/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    0.2954999804496765,
+    -0.28499990701675415,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071067094802856,
+    0.7071068286895752,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "ad6798f2-1515-4de9-92ad-160c1792f75d"
+selected_variant = "ad716215-27b6-4b7b-a46e-d7867b35b44a"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "ad716215-27b6-4b7b-a46e-d7867b35b44a"
+name = "foot"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "c3e1677e-d1f4-4c9f-b3e5-24eac147af64"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "foot"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "ce3c1f30-7524-4a1a-a967-a85c049fb077"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 24
+group = 0
+kind = "mesh"
+body = 4
+
+[[nodes.children]]
+id = "99139dd7-ce04-49d4-8662-a12f0397ca74"
+name = "LH_HIP/visuals/hip/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.30399999022483826,
+    0.10899999737739563,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    1.0,
+    0.00000004371138828673793,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "b9a6ac76-2b9c-48a9-9808-ba2ed11311ba"
+selected_variant = "3fef6d74-9b98-4f4b-9f12-8c3e132f2e16"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "3fef6d74-9b98-4f4b-9f12-8c3e132f2e16"
+name = "hip"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "126ee703-32e8-4211-9270-8d6c0e13c5fb"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "hip"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "48e87e95-5afb-4d16-b373-13eb0780732b"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 27
+group = 0
+kind = "mesh"
+body = 5
+
+[[nodes.children]]
+id = "9f21fce4-bdf3-4c00-ab25-d31b46762933"
+name = "LH_THIGH/visuals/drive/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.37299999594688416,
+    0.11500000953674316,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.70710688829422,
+    -0.7071066498756409,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "f607c14c-2ca8-4a1c-a5c3-a4118b75519b"
+selected_variant = "dad6a97d-149c-44a8-9e7b-94c1c56d6d85"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "dad6a97d-149c-44a8-9e7b-94c1c56d6d85"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 28
+group = 0
+kind = "mesh"
+body = 6
+
+[[nodes.children]]
+id = "5f57c39e-a3f7-4865-97d3-70763fb7a89f"
+name = "LH_THIGH/visuals/thigh/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.37299999594688416,
+    0.11500000953674316,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.70710688829422,
+    -0.7071066498756409,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "1d854b28-3926-4771-9f40-881cd256c0d0"
+selected_variant = "4c244d08-25f0-48bb-a53f-4e69a3b85b8c"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "4c244d08-25f0-48bb-a53f-4e69a3b85b8c"
+name = "thigh"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "bd8b5d6d-87e5-4e22-ab47-8367f8c9dc4d"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "thigh"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "8ae1b984-944a-401f-babb-dfed443cbd74"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 29
+group = 0
+kind = "mesh"
+body = 6
+
+[[nodes.children]]
+id = "2a501ae6-a788-4f98-8900-37d5225c7bee"
+name = "LH_THIGH/visuals/drive_0/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.37299999594688416,
+    0.11500000953674316,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.70710688829422,
+    -0.7071066498756409,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "2669130b-cf58-4d92-b4bf-7646472b0e3b"
+selected_variant = "652beca4-d12e-46d8-9228-41cf694e71ba"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "652beca4-d12e-46d8-9228-41cf694e71ba"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 30
+group = 0
+kind = "mesh"
+body = 6
+
+[[nodes.children]]
+id = "41d01b52-e3c1-40e4-bfba-ca7eceda6cdf"
+name = "LH_SHANK/visuals/shank_r/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.3729999363422394,
+    0.2954999804496765,
+    -0.28499993681907654,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071065902709961,
+    0.7071069478988647,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "70320aff-9c78-4233-8d87-cb54608ef745"
+selected_variant = "5b6974ad-6f7e-41f6-b517-bdda4c4274ac"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "5b6974ad-6f7e-41f6-b517-bdda4c4274ac"
+name = "shank"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "51a79737-3346-4c7f-8f41-65eaad7c39b5"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "shank"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "cf910f61-1d48-4e5c-ab07-2bc9ded256ab"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 34
+group = 0
+kind = "mesh"
+body = 7
+
+[[nodes.children]]
+id = "01a4ebc6-8d6b-4724-9b09-b5359fb257a3"
+name = "LH_SHANK/visuals/foot/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.3729999363422394,
+    0.2954999804496765,
+    -0.28499993681907654,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071065902709961,
+    0.7071069478988647,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "28584b6d-5815-48fa-9b0e-274661a2013a"
+selected_variant = "7fa99069-f798-4544-9edb-11e03a712793"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "7fa99069-f798-4544-9edb-11e03a712793"
+name = "foot"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "c3e1677e-d1f4-4c9f-b3e5-24eac147af64"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "foot"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "ce3c1f30-7524-4a1a-a967-a85c049fb077"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 35
+group = 0
+kind = "mesh"
+body = 7
+
+[[nodes.children]]
+id = "86e346a6-391d-4a99-84e1-283c646016ca"
+name = "RF_HIP/visuals/hip/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.30399999022483826,
+    -0.10899999737739563,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "4bbf5c9f-237a-4b09-aa69-69f0861db917"
+selected_variant = "5d81ceb4-7857-4546-b31b-18579629d3cd"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "5d81ceb4-7857-4546-b31b-18579629d3cd"
+name = "hip"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "126ee703-32e8-4211-9270-8d6c0e13c5fb"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "hip"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "48e87e95-5afb-4d16-b373-13eb0780732b"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 38
+group = 0
+kind = "mesh"
+body = 8
+
+[[nodes.children]]
+id = "e00cb324-7105-4f13-a06e-e910d3e7d22a"
+name = "RF_THIGH/visuals/drive/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    -0.11499999463558197,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071067690849304,
+    0.7071067690849304,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "c1deff84-264c-45ad-91b8-7d5eb34b79fe"
+selected_variant = "c7546bde-7eac-4100-b23e-ac4470748ea9"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "c7546bde-7eac-4100-b23e-ac4470748ea9"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 39
+group = 0
+kind = "mesh"
+body = 9
+
+[[nodes.children]]
+id = "576767c3-053e-438c-b7ed-fac4d3c4c785"
+name = "RF_THIGH/visuals/thigh/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    -0.11499999463558197,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071067690849304,
+    0.7071067690849304,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "046a18cc-fce0-4498-a362-7f397a8e3636"
+selected_variant = "9da69cf1-c95a-41a7-a7b8-1285b4a7bbc5"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "9da69cf1-c95a-41a7-a7b8-1285b4a7bbc5"
+name = "thigh"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "bd8b5d6d-87e5-4e22-ab47-8367f8c9dc4d"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "thigh"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "8ae1b984-944a-401f-babb-dfed443cbd74"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 40
+group = 0
+kind = "mesh"
+body = 9
+
+[[nodes.children]]
+id = "1a0ad731-986f-41fa-b5f7-a095cce3acbf"
+name = "RF_THIGH/visuals/drive_0/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    -0.11499999463558197,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071067690849304,
+    0.7071067690849304,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "627d5de3-8510-4ecc-859f-a6b11488018a"
+selected_variant = "45601530-25f3-4b56-8c31-d758aedc5b36"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "45601530-25f3-4b56-8c31-d758aedc5b36"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 41
+group = 0
+kind = "mesh"
+body = 9
+
+[[nodes.children]]
+id = "9df161f8-b7dc-4fd1-b0d0-52b4d8024ea6"
+name = "RF_SHANK/visuals/shank_r/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    -0.2954999804496765,
+    -0.28499990701675415,
+]
+rotation = [
+    0.0,
+    0.0,
+    -0.7071067094802856,
+    0.7071068286895752,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "78776849-93ab-4077-a11f-5483bd37b60c"
+selected_variant = "68a11a9c-f943-4189-a9b5-94b39bc5f95c"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "68a11a9c-f943-4189-a9b5-94b39bc5f95c"
+name = "shank"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "51a79737-3346-4c7f-8f41-65eaad7c39b5"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "shank"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "cf910f61-1d48-4e5c-ab07-2bc9ded256ab"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 45
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "9a2ac9fd-98df-428e-8dd1-7414028c58bc"
+name = "RF_SHANK/visuals/foot/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    0.37299999594688416,
+    -0.2954999804496765,
+    -0.28499990701675415,
+]
+rotation = [
+    0.0,
+    0.0,
+    -0.7071067094802856,
+    0.7071068286895752,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "12cce5b3-075c-4848-bb08-ec8a5ab8cfc0"
+selected_variant = "854e443e-3a0f-4265-9d59-425fc04aecce"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "854e443e-3a0f-4265-9d59-425fc04aecce"
+name = "foot"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "c3e1677e-d1f4-4c9f-b3e5-24eac147af64"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "foot"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "ce3c1f30-7524-4a1a-a967-a85c049fb077"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 46
+group = 0
+kind = "mesh"
+body = 10
+
+[[nodes.children]]
+id = "ccb4743c-d2c3-44e4-8582-26ee404aeef9"
+name = "RH_HIP/visuals/hip/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.30399999022483826,
+    -0.10899999737739563,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    1.0,
+    0.00000004371138828673793,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "173fe917-6195-4e5b-a375-b0858b4500ec"
+selected_variant = "b340f438-ae90-45fa-9a86-69e9e25049ef"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "b340f438-ae90-45fa-9a86-69e9e25049ef"
+name = "hip"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "126ee703-32e8-4211-9270-8d6c0e13c5fb"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "hip"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "48e87e95-5afb-4d16-b373-13eb0780732b"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 49
+group = 0
+kind = "mesh"
+body = 11
+
+[[nodes.children]]
+id = "5f6c2ac1-fc3d-46d6-8b49-97aca2ae154e"
+name = "RH_THIGH/visuals/drive/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.37299999594688416,
+    -0.11499998718500137,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071066498756409,
+    0.70710688829422,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "bfcc9f97-6f4a-4863-838e-6a6b575c37da"
+selected_variant = "ce7bb966-b006-4e47-afbd-ccb57b69f28d"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "ce7bb966-b006-4e47-afbd-ccb57b69f28d"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 50
+group = 0
+kind = "mesh"
+body = 12
+
+[[nodes.children]]
+id = "4ce22cf2-0082-40d1-9c0d-4b34c1e11bd4"
+name = "RH_THIGH/visuals/thigh/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.37299999594688416,
+    -0.11499998718500137,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071066498756409,
+    0.70710688829422,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "35745375-84f1-463b-b7d2-8721bacb8f49"
+selected_variant = "26dd9617-43ea-4aed-94e9-fb2a0a79ea9a"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "26dd9617-43ea-4aed-94e9-fb2a0a79ea9a"
+name = "thigh"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "bd8b5d6d-87e5-4e22-ab47-8367f8c9dc4d"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "thigh"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "8ae1b984-944a-401f-babb-dfed443cbd74"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 51
+group = 0
+kind = "mesh"
+body = 12
+
+[[nodes.children]]
+id = "fc7549b7-4ec0-486d-9cca-faedc69b8a60"
+name = "RH_THIGH/visuals/drive_0/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.37299999594688416,
+    -0.11499998718500137,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071066498756409,
+    0.70710688829422,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "7281827b-e175-410b-b00f-13a1b4697231"
+selected_variant = "f34cab29-15a3-4435-ad6b-c762a2eca5d6"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "f34cab29-15a3-4435-ad6b-c762a2eca5d6"
+name = "drive"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "b7ef89a3-959e-41b8-a6a1-07974de7bfb0"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "drive"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 52
+group = 0
+kind = "mesh"
+body = 12
+
+[[nodes.children]]
+id = "04a3cb86-bf09-49a0-ae42-2aca017de3a1"
+name = "RH_SHANK/visuals/shank_l/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.3730000853538513,
+    -0.2954999506473541,
+    -0.28499990701675415,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071068286895752,
+    -0.7071067094802856,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "f7d93916-0989-4fca-a458-89ad4c0c5c08"
+selected_variant = "7f6ff861-7a23-4d71-bb84-21ab4e0488a4"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "7f6ff861-7a23-4d71-bb84-21ab4e0488a4"
+name = "shank"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "51a79737-3346-4c7f-8f41-65eaad7c39b5"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "shank"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "cf910f61-1d48-4e5c-ab07-2bc9ded256ab"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 56
+group = 0
+kind = "mesh"
+body = 13
+
+[[nodes.children]]
+id = "23be394f-e51c-490c-8036-f9618bb4bf0d"
+name = "RH_SHANK/visuals/foot/mesh"
+locked = true
+visible = true
+prefab = false
+children = []
+
+[nodes.children.transform]
+translation = [
+    -0.3730000853538513,
+    -0.2954999506473541,
+    -0.28499990701675415,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.7071068286895752,
+    -0.7071067094802856,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.children.kind.mesh]
+mesh = "57d724d1-b6b2-4a63-b563-b235aea3dd49"
+selected_variant = "b1583dab-fc3e-456b-9a81-770c97313cc7"
+
+[[nodes.children.kind.mesh.material_variants]]
+id = "b1583dab-fc3e-456b-9a81-770c97313cc7"
+name = "foot"
+
+[nodes.children.kind.mesh.material_variants.instance]
+asset = "c3e1677e-d1f4-4c9f-b3e5-24eac147af64"
+
+[nodes.children.kind.mesh.material_variants.instance.inline]
+label = "foot"
+base_color = [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.5
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.base_color_texture]
+asset = "ce3c1f30-7524-4a1a-a967-a85c049fb077"
+
+[nodes.children.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.children.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.children.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.children.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.children.kind.mesh.lod]
+kind = "none"
+
+[nodes.children.mujoco.geom]
+geom_id = 57
+group = 0
+kind = "mesh"
+body = 13
+
+[[nodes]]
+id = "00000000-0000-4000-8000-000000000001"
+name = "floor"
+locked = false
+visible = true
+prefab = false
+children = []
+
+[nodes.transform]
+translation = [
+    0.0,
+    0.0,
+    0.0,
+]
+rotation = [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
+scale = [
+    1.0,
+    1.0,
+    1.0,
+]
+
+[nodes.kind.mesh]
+mesh = "00000000-0000-4000-8000-000000000001"
+selected_variant = "00000000-0000-4000-8000-000000000003"
+
+[[nodes.kind.mesh.material_variants]]
+id = "00000000-0000-4000-8000-000000000003"
+name = "floor-gray"
+
+[nodes.kind.mesh.material_variants.instance]
+asset = "00000000-0000-4000-8000-000000000002"
+
+[nodes.kind.mesh.material_variants.instance.inline]
+label = ""
+base_color = [
+    0.41999998688697815,
+    0.41999998688697815,
+    0.44999998807907104,
+    1.0,
+]
+metallic = 0.0
+roughness = 0.8999999761581421
+emissive = [
+    0.0,
+    0.0,
+    0.0,
+]
+normal_scale = 1.0
+occlusion_strength = 1.0
+ssr_mask = 1.0
+double_sided = false
+vertex_colors_enabled = false
+alpha_mode = "opaque"
+shading = "pbr"
+
+[nodes.kind.mesh.material_variants.instance.inline.extensions]
+
+[nodes.kind.mesh.material_variants.instance.uniform_overrides]
+
+[nodes.kind.mesh.material_variants.instance.texture_overrides]
+
+[nodes.kind.mesh.material_variants.instance.buffer_overrides]
+
+[nodes.kind.mesh.shadow]
+cast = true
+receive = true
+
+[nodes.kind.mesh.lod]
+kind = "none"
+
+[pack]
+packs = [3294350]
+
+[pack.files]
+"assets/046a18cc-fce0-4498-a362-7f397a8e3636.glb" = [
+    0,
+    2893086,
+    16016,
+]
+"assets/04eb2aa2-f8da-4f93-a8a8-608589410733.glb" = [
+    0,
+    2909102,
+    16016,
+]
+"assets/0cea5b8a-f624-4073-b5f5-f4f5a995aad2.glb" = [
+    0,
+    2629662,
+    31604,
+]
+"assets/0d1a60da-d1e8-4fed-9f8c-0e47fb73a039.glb" = [
+    0,
+    2454530,
+    36396,
+]
+"assets/0ef4a252-1bd3-4dbe-a9a3-24fa8589bac6.glb" = [
+    0,
+    3274378,
+    2716,
+]
+"assets/113b79da-ea95-4e6f-88a7-91c4a2d6c10f.glb" = [
+    0,
+    3135378,
+    7476,
+]
+"assets/12cce5b3-075c-4848-bb08-ec8a5ab8cfc0.glb" = [
+    0,
+    3030238,
+    10688,
+]
+"assets/137359a8-15f5-41a2-af8a-bbbcc4258173.glb" = [
+    0,
+    3205158,
+    5200,
+]
+"assets/154084eb-82fd-4ce5-98d5-9d9ebc4269e7.glb" = [
+    0,
+    2801014,
+    20948,
+]
+"assets/17211569-b696-4b4c-a7af-3f4693153d79.glb" = [
+    0,
+    2661266,
+    29396,
+]
+"assets/173fe917-6195-4e5b-a375-b0858b4500ec.glb" = [
+    0,
+    3247206,
+    3908,
+]
+"assets/19c814c4-1725-49f2-9fd8-fef1a2b62ee1.glb" = [
+    0,
+    3230614,
+    4388,
+]
+"assets/1d854b28-3926-4771-9f40-881cd256c0d0.glb" = [
+    0,
+    2925118,
+    16016,
+]
+"assets/1f6c6e3f-d8b0-4621-900a-1070600844c5.glb" = [
+    0,
+    3215542,
+    5032,
+]
+"assets/215419f8-0dec-4e41-89bd-529f9b69c8e9.glb" = [
+    0,
+    3082810,
+    7688,
+]
+"assets/2669130b-cf58-4d92-b4bf-7646472b0e3b.glb" = [
+    0,
+    3090498,
+    7480,
+]
+"assets/28584b6d-5815-48fa-9b0e-274661a2013a.glb" = [
+    0,
+    3051614,
+    10684,
+]
+"assets/2b0091dc-eea3-477a-9e15-71959225341f.glb" = [
+    0,
+    3097978,
+    7480,
+]
+"assets/31f85cd0-df3a-41b5-bec3-84a65e6a60b5.ktx2" = [
+    0,
+    2070397,
+    63433,
+]
+"assets/357124cf-e13c-423c-94f2-0c982a4eee30.glb" = [
+    0,
+    2758622,
+    21396,
+]
+"assets/35745375-84f1-463b-b7d2-8721bacb8f49.glb" = [
+    0,
+    2941134,
+    16016,
+]
+"assets/3d847357-e07c-4e47-aefc-ceeb09bc1f43.glb" = [
+    0,
+    2984970,
+    11724,
+]
+"assets/3e4cf571-8900-4387-8e89-59fd41139b81.glb" = [
+    0,
+    3105458,
+    7480,
+]
+"assets/3eee2106-3e47-4883-ae54-f3a8cc159634.glb" = [
+    0,
+    3239290,
+    4004,
+]
+"assets/3ef3fedc-e2af-488b-b0ce-df528ee8ef70.glb" = [
+    0,
+    3289610,
+    2376,
+]
+"assets/4250b720-c2a6-4716-960d-d35f7e169d05.glb" = [
+    0,
+    2358877,
+    52116,
+]
+"assets/48e87e95-5afb-4d16-b373-13eb0780732b.ktx2" = [
+    0,
+    956309,
+    156807,
+]
+"assets/4bbf5c9f-237a-4b09-aa69-69f0861db917.glb" = [
+    0,
+    3251114,
+    3900,
+]
+"assets/57d724d1-b6b2-4a63-b563-b235aea3dd49.glb" = [
+    0,
+    3019546,
+    10692,
+]
+"assets/58c9a102-be8b-424f-9ac3-c79c65923b34.glb" = [
+    0,
+    3235002,
+    4288,
+]
+"assets/5cef6e13-9fd2-4642-bffe-fda3ea84d1b9.glb" = [
+    0,
+    3282306,
+    2480,
+]
+"assets/5d363447-9993-44cc-aac4-ac711ddadcac.glb" = [
+    0,
+    2690662,
+    23084,
+]
+"assets/627d5de3-8510-4ecc-859f-a6b11488018a.glb" = [
+    0,
+    3112938,
+    7480,
+]
+"assets/6312b22b-2f99-4824-96d0-94681ff97252.glb" = [
+    0,
+    3180214,
+    6308,
+]
+"assets/661e12ec-4853-474c-a695-e45e392e6a5e.ktx2" = [
+    0,
+    2133830,
+    59019,
+]
+"assets/6dc8714c-a067-491a-b632-77e68478c55b.glb" = [
+    0,
+    3120418,
+    7480,
+]
+"assets/70320aff-9c78-4233-8d87-cb54608ef745.glb" = [
+    0,
+    2839746,
+    17780,
+]
+"assets/7281827b-e175-410b-b00f-13a1b4697231.glb" = [
+    0,
+    3127898,
+    7480,
+]
+"assets/7564818c-8d5f-490e-ad15-9f0e04cff13f.glb" = [
+    0,
+    3072794,
+    10016,
+]
+"assets/78776849-93ab-4077-a11f-5483bd37b60c.glb" = [
+    0,
+    2821962,
+    17784,
+]
+"assets/7a8d3db1-1cf8-4e92-a4ef-3a98545f0cc1.glb" = [
+    0,
+    1926001,
+    73048,
+]
+"assets/7cd4273f-b936-4a9c-a6ae-a7162df13620.glb" = [
+    0,
+    3062298,
+    10496,
+]
+"assets/7e032ecf-04a5-4421-8e96-d6acd4860879.glb" = [
+    0,
+    2973142,
+    11828,
+]
+"assets/7ed3333a-dfcc-47a0-9ede-582ed21063b9.glb" = [
+    0,
+    2713746,
+    22688,
+]
+"assets/82fbdaf6-95a2-45ed-abdb-31594d0bc980.glb" = [
+    0,
+    3243294,
+    3912,
+]
+"assets/8757e038-913d-414e-b00d-977e8599118a.glb" = [
+    0,
+    3142854,
+    7472,
+]
+"assets/888db881-01e9-4bb1-af68-6d34104c0977.glb" = [
+    0,
+    3277094,
+    2704,
+]
+"assets/8ae1b984-944a-401f-babb-dfed443cbd74.ktx2" = [
+    0,
+    1113116,
+    153131,
+]
+"assets/8f17e13f-3403-4048-8c69-f03151ac8e4a.glb" = [
+    0,
+    3258910,
+    3532,
+]
+"assets/8f8766d9-b2c3-4a2d-a4bd-be93a49f0660.glb" = [
+    0,
+    3265766,
+    2904,
+]
+"assets/901c904d-86a1-4c9b-9d53-589b6ff3f316.glb" = [
+    0,
+    2780018,
+    20996,
+]
+"assets/940e3031-cd90-4997-8215-59d377a037ff.glb" = [
+    0,
+    3284786,
+    2432,
+]
+"assets/9451ce74-85c0-4141-9084-304e79428479.glb" = [
+    0,
+    2248817,
+    55032,
+]
+"assets/94e57eaa-f959-4d08-8c7c-700c504badc2.ktx2" = [
+    0,
+    1266247,
+    120594,
+]
+"assets/94fc3029-af98-44ba-8c4b-af6960125faf.glb" = [
+    0,
+    3268670,
+    2884,
+]
+"assets/9ad8f6d1-e54f-4e7a-ba27-e93a93b2b7d9.glb" = [
+    0,
+    3220574,
+    5024,
+]
+"assets/9aeacf59-a266-4516-ac48-5155d4bfc5f8.glb" = [
+    0,
+    3279798,
+    2508,
+]
+"assets/9d1055e9-7173-4f21-affc-2511e8f557a3.glb" = [
+    0,
+    3186522,
+    6236,
+]
+"assets/a76f9459-1f77-4cae-873f-48d7de3d8a61.glb" = [
+    0,
+    1768761,
+    83032,
+]
+"assets/ad098ae5-3ee1-4c80-9c25-2e2c8544c368.glb" = [
+    0,
+    2857526,
+    17780,
+]
+"assets/ad6798f2-1515-4de9-92ad-160c1792f75d.glb" = [
+    0,
+    3040926,
+    10688,
+]
+"assets/b00c2e42-fa48-4bfd-9fd4-f2bb0e0749d1.glb" = [
+    0,
+    3198994,
+    6164,
+]
+"assets/b01f0621-a72a-4258-a1ff-14e37b1f8042.ktx2" = [
+    0,
+    2410993,
+    43537,
+]
+"assets/b1776a3c-098b-40f4-9ee9-72b1db24ad71.ktx2" = [
+    0,
+    613601,
+    182664,
+]
+"assets/b8b2ab91-dfda-4c3e-9032-a058ebce17b7.glb" = [
+    0,
+    2562106,
+    33824,
+]
+"assets/b9a6ac76-2b9c-48a9-9808-ba2ed11311ba.glb" = [
+    0,
+    3255014,
+    3896,
+]
+"assets/bfcc9f97-6f4a-4863-838e-6a6b575c37da.glb" = [
+    0,
+    3150326,
+    7472,
+]
+"assets/c1deff84-264c-45ad-91b8-7d5eb34b79fe.glb" = [
+    0,
+    3157798,
+    7472,
+]
+"assets/c644d98c-d359-4939-9e96-3c188637bacb.glb" = [
+    0,
+    3008266,
+    11280,
+]
+"assets/c70412b5-410c-40d6-8d97-85e96fb036ae.glb" = [
+    0,
+    3262442,
+    3324,
+]
+"assets/c773cfd7-a88a-4f17-9647-923564c342eb.glb" = [
+    0,
+    2526574,
+    35532,
+]
+"assets/c77e4981-55a8-4713-a166-b7ca27d7851e.glb" = [
+    0,
+    2192849,
+    55968,
+]
+"assets/c8ed9b4f-a70b-487d-886d-adf3a1d5d0c2.ktx2" = [
+    0,
+    796265,
+    160044,
+]
+"assets/c90234e8-46be-4ea1-9389-bcefee4fea7b.glb" = [
+    0,
+    3165270,
+    7472,
+]
+"assets/cb08fb3d-1a22-46c5-a071-e6a97f1ef7fd.glb" = [
+    0,
+    2490926,
+    35648,
+]
+"assets/cd9dc87b-27bb-48c3-b624-b080cdb2158b.glb" = [
+    0,
+    2303849,
+    55028,
+]
+"assets/ce3c1f30-7524-4a1a-a967-a85c049fb077.ktx2" = [
+    0,
+    1851793,
+    74208,
+]
+"assets/cf910f61-1d48-4e5c-ab07-2bc9ded256ab.ktx2" = [
+    0,
+    1501634,
+    96271,
+]
+"assets/cfd0d356-e6a2-457f-9751-a0a81cf7ac51.glb" = [
+    0,
+    3271554,
+    2824,
+]
+"assets/d6a9515a-ecae-40be-9ca6-7a8e96ff5c92.ktx2" = [
+    0,
+    0,
+    389655,
+]
+"assets/d7ff4a12-626a-4452-96d0-545d0bc4942d.glb" = [
+    0,
+    3210358,
+    5184,
+]
+"assets/d94d8b4b-b701-4acf-8a43-9008127026a1.glb" = [
+    0,
+    2595930,
+    33732,
+]
+"assets/def2f736-268b-4d97-bec8-44d1f8d101ff.ktx2" = [
+    0,
+    389655,
+    223946,
+]
+"assets/df87cc50-dbce-46f3-84a4-50086bc63526.glb" = [
+    0,
+    1683561,
+    85200,
+]
+"assets/e305e988-1e23-4f49-9cd9-219b7fb193f1.ktx2" = [
+    0,
+    1597905,
+    85656,
+]
+"assets/e5d5c2a1-1d29-4b17-8b1a-d26cf7f475d8.glb" = [
+    0,
+    3287218,
+    2392,
+]
+"assets/e5e4b3e4-2163-42a7-80e0-9bf6a605862a.glb" = [
+    0,
+    2736434,
+    22188,
+]
+"assets/eb66536e-0ce3-445e-9da6-1ff23c2585a1.glb" = [
+    0,
+    2996694,
+    11572,
+]
+"assets/ec6f1ea0-a6ac-4570-a955-c455c437b918.glb" = [
+    0,
+    3192758,
+    6236,
+]
+"assets/ed079108-1694-4643-b3c2-f3f6588f717e.glb" = [
+    0,
+    1999049,
+    71348,
+]
+"assets/f16e7413-a719-444b-8148-09469c42e748.ktx2" = [
+    0,
+    1386841,
+    114793,
+]
+"assets/f607c14c-2ca8-4a1c-a5c3-a4118b75519b.glb" = [
+    0,
+    3172742,
+    7472,
+]
+"assets/f7d93916-0989-4fca-a458-89ad4c0c5c08.glb" = [
+    0,
+    2875306,
+    17780,
+]
+"assets/fa450df0-0fe1-4ec7-ab5c-3427ab6aa70d.glb" = [
+    0,
+    2957150,
+    15992,
+]
+"assets/fb058639-7beb-44f2-b08b-b6008d1e0da6.glb" = [
+    0,
+    3225598,
+    5016,
+]
+"assets/ff66ff31-097a-4c31-a55c-a194da9bcdb0.glb" = [
+    0,
+    3291986,
+    2364,
+]
