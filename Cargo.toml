@@ -32,9 +32,9 @@ publish = false
 #   awsm-renderer-scene-loader the player load path (`load_scene_for_player`) a
 #                              shipped game uses; also re-exports the Basis KTX2
 #                              transcoder config as `scene_loader::basis`.
-awsm-renderer = "0.41.1"
-awsm-renderer-scene = "0.41.1"
-awsm-renderer-scene-loader = { version = "0.41.1", features = ["http"] }
+awsm-renderer = "0.42.0"
+awsm-renderer-scene = "0.42.0"
+awsm-renderer-scene-loader = { version = "0.42.0", features = ["http"] }
 
 # ── DOM, driven from pure Rust ──────────────────────────────────────────────
 # NOTE: the published dominator 0.5.38 is incompatible with
