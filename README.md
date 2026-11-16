@@ -28,6 +28,45 @@ The renderer never learns which one it is. It is the same "pose sink" as the
 [`physics-mujoco`](https://github.com/awsm-fun/awsm-template-physics-mujoco)
 template, minus the simulator in the page.
 
+## Threading at a glance
+
+Three threads and one piece of shared state on the hot path: the pose
+block. Solid arrows are spawns, dotted arrows are `postMessage` (startup,
+status and input only), thick arrows are shared-memory reads/writes.
+
+```mermaid
+flowchart LR
+    subgraph RUST["Rust wasm module · one shared WebAssembly.Memory"]
+        direction TB
+        MAIN["Main thread<br/>DOM · HUD · pointer input<br/>allocates the pose block"]
+        RENDER["Render worker<br/>awsm-renderer on an OffscreenCanvas<br/>applies poses every frame"]
+    end
+
+    POSE["Pose worker · plain JS, own memory<br/>replays captures or reads the socket"]
+    SAB[("Pose block · SharedArrayBuffer<br/>seqlock header · frames / source / dropped<br/>geom poses for every robot")]
+    WS["Isaac Lab harness or mock<br/>external process"]
+    BASIS["Basis worker · plain JS<br/>KTX2 texture transcode at load<br/>its own memory"]
+
+    MAIN -- "spawns, transfers the OffscreenCanvas" --> RENDER
+    MAIN -- "spawns, init: captures base + stream URL" --> POSE
+    RENDER -. "RenderMsg: Progress, SceneReady with instances, Ready, Error" .-> MAIN
+    MAIN -. "start + pose block + instances" .-> POSE
+    MAIN -. "pose block, then ResizeMsg / CameraMsg" .-> RENDER
+    POSE -. "progress, source status, errors" .-> MAIN
+    WS -. "WebSocket frames, only with ?stream=" .-> POSE
+    POSE == "writes each frame" ==> SAB
+    SAB == "snapshot copied once per frame" ==> RENDER
+    RENDER -. "spawned on demand, buffers transferred" .-> BASIS
+```
+
+| What | Lives in | Written by | Read by | Synchronization |
+|---|---|---|---|---|
+| Pose block | a standalone `SharedArrayBuffer`, allocated by main once the render worker reports the scene's robots | pose worker (single writer) | render worker (single reader) | seqlock: writer makes `seq` odd, writes, makes it even; reader retries a torn copy |
+| Rust heap | the shared `WebAssembly.Memory` main + render attach to | each thread, its own data | each thread, its own data | no app state crosses through it — it is what lets one wasm module run on both threads |
+
+After the startup handshake, poses go pose worker → pose block → render
+worker with no messages. More in [How it's wired](#how-its-wired) below.
+
 ## Run it
 
 ```sh
