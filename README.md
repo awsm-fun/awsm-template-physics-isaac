@@ -30,6 +30,24 @@ template, minus the simulator in the page.
 
 ## Threading at a glance
 
+### What runs where
+
+```mermaid
+flowchart TB
+    MAIN["<b>Main thread</b><br/>UI and DOM<br/>pointer input<br/>startup handshake"]
+    RENDER["<b>Render worker</b><br/>awsm-renderer (WebGPU)<br/>scene loading<br/>camera<br/>applying robot poses"]
+    POSE["<b>Pose worker</b><br/>pose source: replays captures<br/>or receives a live WebSocket stream"]
+    BASIS["<b>Basis worker</b><br/>texture decoding at load"]
+
+    MAIN --> RENDER
+    MAIN --> POSE
+    RENDER --> BASIS
+```
+
+Arrows point from a thread to the threads that work on its behalf.
+
+### In detail
+
 Three threads and one piece of shared state on the hot path: the pose
 block. Solid arrows are spawns, dotted arrows are `postMessage` (startup,
 status and input only), thick arrows are shared-memory reads/writes.
