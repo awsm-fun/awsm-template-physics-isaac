@@ -61,7 +61,7 @@ flowchart LR
     end
 
     POSE["Pose worker · plain JS, own memory<br/>replays captures or reads the socket"]
-    SAB[("Pose block · SharedArrayBuffer<br/>seqlock header · frames / source / dropped<br/>geom poses for every robot")]
+    SAB[("Pose block · SharedArrayBuffer<br/>header · frames / source / dropped<br/>per robot: a ring of time-stamped samples")]
     WS["Isaac Lab harness or mock<br/>external process"]
     BASIS["Basis worker · plain JS<br/>KTX2 texture transcode at load<br/>its own memory"]
 
@@ -69,21 +69,44 @@ flowchart LR
     MAIN -- "spawns, init: captures base + stream URL" --> POSE
     RENDER -. "RenderMsg: Progress, SceneReady with instances, Ready, Error" .-> MAIN
     MAIN -. "start + pose block + instances" .-> POSE
-    MAIN -. "pose block, then ResizeMsg / CameraMsg" .-> RENDER
+    MAIN -. "pose block, then ResizeMsg, and the camera state once per frame while it moves" .-> RENDER
     POSE -. "progress, source status, errors" .-> MAIN
     WS -. "WebSocket frames, only with ?stream=" .-> POSE
-    POSE == "writes each frame" ==> SAB
-    SAB == "snapshot copied once per frame" ==> RENDER
+    POSE == "writes time-stamped samples" ==> SAB
+    SAB == "two samples around each frame's time, blended" ==> RENDER
     RENDER -. "spawned on demand, buffers transferred" .-> BASIS
 ```
 
 | What | Lives in | Written by | Read by | Synchronization |
 |---|---|---|---|---|
-| Pose block | a standalone `SharedArrayBuffer`, allocated by main once the render worker reports the scene's robots | pose worker (single writer) | render worker (single reader) | seqlock: writer makes `seq` odd, writes, makes it even; reader retries a torn copy |
+| Pose block | a standalone `SharedArrayBuffer`, allocated by main once the render worker reports the scene's robots | pose worker (single writer) | render worker (single reader) | a seqlock per ring slot: the writer makes the slot's `seq` odd, writes, makes it even; the reader skips a slot caught mid-write (it never waits) |
 | Rust heap | the shared `WebAssembly.Memory` main + render attach to | each thread, its own data | each thread, its own data | no app state crosses through it — it is what lets one wasm module run on both threads |
 
 After the startup handshake, poses go pose worker → pose block → render
 worker with no messages. More in [How it's wired](#how-its-wired) below.
+
+### Timing
+
+Every pose sample carries the time it is to be shown at, on the clock all the
+page's threads share (`performance.timeOrigin + now`). Each frame the render
+worker shows every robot at that frame's own time, blending the two samples
+around it, so motion is paced by the display alone: how evenly the pose
+worker's timers fire or the network delivers never shows.
+
+- **Replay** publishes each capture frame stamped with when it is due on the
+  loop's timeline, a little ahead of time. The recorded motion is sampled
+  exactly at each display frame, with no added latency.
+- **Stream** maps each frame's `step × dt` onto the page clock by the
+  least-delayed recent arrivals, then adds a playout delay of 2.5 steps (83 ms
+  at 30 Hz) so ordinary network jitter never leaves the renderer short. If the
+  stream stalls past that, the robots hold their newest pose; nothing is
+  extrapolated.
+- **Camera**: the main thread owns the orbit camera and, once per frame while
+  it moves, sends its state stamped with that frame's time. The render worker
+  uses the state from main's *previous* frame, so every drawn frame gets
+  exactly one frame of camera movement (applying pointer events as they
+  arrived raced the two threads and made orbiting judder). One frame of
+  latency.
 
 ## Run it
 
@@ -118,22 +141,24 @@ task stream -- --bogus            # also sends frames for an unknown robot
 
 Then open `http://127.0.0.1:9000/?stream=ws://127.0.0.1:8765`. The HUD shows
 the frame rate and how many frames were dropped. Stop the producer and the
-robots hold their last pose while the page reconnects.
+robots hold their last pose while the page reconnects. `task stream -- --plain`
+sends the older wire form without step numbers, which the page also accepts.
 
 ## How it's wired
 
 | thread | code | role |
 |---|---|---|
 | **Main** | `src/main_thread.rs` | DOM (Dominator), spawns both workers, brokers startup. The Stats panel is `src/stats.rs`. |
-| **Render** | `src/render_thread.rs` | `awsm-renderer` on an `OffscreenCanvas`. Loads the player bundle, then each frame applies every robot's poses with `scene_loader::mujoco::apply_geom_poses`. |
+| **Render** | `src/render_thread.rs` | `awsm-renderer` on an `OffscreenCanvas`. Loads the player bundle, then each frame blends every robot's two samples around the frame time and applies the result with `scene_loader::mujoco::apply_geom_poses`. |
 | **Pose worker** | `web/workers/pose-worker.js` | The pose *source*: replays captures or reads the socket, and publishes into a `SharedArrayBuffer` pose block. |
 
 Main and render share one wasm module and one `WebAssembly.Memory` (the
 threaded build: nightly, `+atomics`, `build-std`, COOP/COEP; see
-`Taskfile.yml`). The pose block is guarded by a **seqlock**: the writer makes
-a counter odd, writes, makes it even, and the reader retries a torn frame
-instead of blocking. The layout and the wire are documented in
-`src/protocol.rs`.
+`Taskfile.yml`). The pose block holds a small ring of time-stamped samples per
+robot, each slot guarded by its own **seqlock**: the writer makes the slot's
+counter odd, writes, makes it even, and the reader skips a slot caught
+mid-write instead of blocking. The layout, the timing and the wire are
+documented in `src/protocol.rs`; the camera's path in `src/camera.rs`.
 
 ### The one rule: the fingerprint
 
@@ -143,8 +168,13 @@ it:
 
 ```text
 bytes 0..32   SHA-256 of the robot's root USD, raw
-bytes 32..    7 × geom_count little-endian f32: [px,py,pz,qw,qx,qy,qz] per geom
+bytes 32..36  u32 step number     } the stepped form (recommended): the page
+bytes 36..40  f32 seconds/step    } shows each frame at step × dt on its clock
+then          7 × geom_count little-endian f32: [px,py,pz,qw,qx,qy,qz] per geom
 ```
+
+The plain form (no step and dt) is still accepted: each frame then counts as
+one step, with dt estimated from how often they arrive.
 
 A capture of a different file is refused with an error on the HUD. A stream
 frame for a robot the scene does not contain, or of the wrong length, is
@@ -195,6 +225,7 @@ stream = IsaacLabStream(
     env_origins=env.unwrapped.scene.env_origins,
     sidecar="panda.mujoco.json",
     usd="/path/to/franka.usd",     # the same file the scene was exported from
+    dt=env.unwrapped.step_dt,      # seconds per env.step: sends step + dt
 ).start()                          # ws://0.0.0.0:8765
 while simulation_app.is_running():
     obs, *_ = env.step(policy(obs))

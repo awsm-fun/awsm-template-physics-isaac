@@ -27,6 +27,7 @@
 //! the simulator: the renderer never learns what produced the poses.
 
 pub mod bootstrap;
+pub mod camera;
 pub mod main_thread;
 pub mod protocol;
 pub mod render_thread;

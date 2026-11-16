@@ -8,7 +8,8 @@ wire, so the stream path can be exercised without Isaac Sim.
 Each capture is sent with the fingerprint it records (`source.sha256`), so the
 player binds it to the matching robot exactly as it would a live Isaac Lab
 frame. `--bogus` also sends one frame per second with an unknown fingerprint,
-which the player must drop and count (the HUD shows "N dropped").
+which the player must drop and count (the HUD shows "N dropped"). Frames go
+out in the stepped form (step + dt); `--plain` sends the older plain form.
 """
 
 import argparse
@@ -28,7 +29,7 @@ def load(path):
     for f in cap["frames"]:
         if len(f["geom_poses"]) != n:
             raise SystemExit(f"{path}: frame at t={f['time']} has {len(f['geom_poses'])} floats, want {n}")
-        frames.append(frame(cap["source"]["sha256"], struct.pack(f"<{n}f", *f["geom_poses"])))
+        frames.append((cap["source"]["sha256"], struct.pack(f"<{n}f", *f["geom_poses"])))
     dt = cap["frames"][1]["time"] - cap["frames"][0]["time"]
     print(f"{path}: {cap['source']['filename']} {cap['source']['sha256'][:12]} "
           f"{cap['geom_count']} geoms, {len(frames)} frames @ {1 / dt:.0f} Hz")
@@ -41,6 +42,7 @@ def main():
     ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=8765)
     ap.add_argument("--bogus", action="store_true", help="also send an unknown-fingerprint frame every second")
+    ap.add_argument("--plain", action="store_true", help="send the plain wire form (no step / dt header)")
     args = ap.parse_args()
 
     clips = [load(p) for p in args.captures]
@@ -50,9 +52,13 @@ def main():
     step = 0
     while True:
         t = step * dt
-        batch = [frames[int(t / d) % len(frames)] for frames, d in clips]
+        picked = [frames[int(t / d) % len(frames)] for frames, d in clips]
+        if args.plain:
+            batch = [frame(sha, payload) for sha, payload in picked]
+        else:
+            batch = [frame(sha, payload, step, dt) for sha, payload in picked]
         if args.bogus and step % max(1, round(1 / dt)) == 0:
-            batch.append(b"\xff" * 32 + batch[0][32:])
+            batch.append(frame("ff" * 32, picked[0][1]))
         server.publish(batch)
         step += 1
         time.sleep(max(0.0, t0 + step * dt - time.monotonic()))

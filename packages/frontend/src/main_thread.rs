@@ -10,10 +10,11 @@
 //! 3. When the render worker reports `SceneReady { instances }`, allocate the
 //!    `SharedArrayBuffer` pose block sized for exactly those robots, and hand
 //!    it to both workers. From then on poses flow pose worker → render worker
-//!    through shared memory only; main relays resize, camera gestures, and the
-//!    pose worker's status line.
+//!    through shared memory only; main relays resize and the pose worker's
+//!    status line, and owns the orbit camera: once per frame, if it moved,
+//!    main posts its state to the render worker (see `crate::camera`).
 
-use std::cell::Cell;
+use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 
 use dominator::{clone, html};
@@ -24,7 +25,8 @@ use web_sys::js_sys;
 use web_sys::{HtmlCanvasElement, MessageEvent, Worker, WorkerOptions, WorkerType};
 
 use crate::bootstrap::spawn_shared_worker_transfer;
-use crate::protocol::{pose_block_bytes, CameraMsg, RenderMsg};
+use crate::camera::{CameraMsg, OrbitCamera};
+use crate::protocol::{pose_block_bytes, RenderMsg};
 
 /// Build + mount the DOM, then start the worker pipeline.
 pub fn start() -> Result<(), JsValue> {
@@ -142,8 +144,7 @@ fn setup(
     let transfer = js_sys::Array::new();
     transfer.push(&offscreen);
 
-    let render_cell: Rc<std::cell::RefCell<Option<Worker>>> =
-        Rc::new(std::cell::RefCell::new(None));
+    let render_cell: Rc<RefCell<Option<Worker>>> = Rc::new(RefCell::new(None));
     let started = Rc::new(Cell::new(false));
     let on_render_msg = Closure::<dyn FnMut(MessageEvent)>::new(clone!(
         status, render_cell, started, pose, stats => move |e: MessageEvent| {
@@ -210,9 +211,13 @@ fn setup(
     Ok(())
 }
 
-/// Pointer-drag orbits, wheel zooms — deltas forwarded to the render thread's
-/// camera.
+/// Pointer-drag orbits, wheel zooms. The camera lives here, clamps and all;
+/// each main-thread frame in which it changed, its state goes to the render
+/// worker stamped with that frame's time (see `crate::camera` for why it is
+/// once per frame and not once per event).
 fn install_pointer(canvas: &HtmlCanvasElement, render: Worker) -> Result<(), JsValue> {
+    let camera = Rc::new(RefCell::new(OrbitCamera::default()));
+    let dirty = Rc::new(Cell::new(false));
     let dragging = Rc::new(Cell::new(false));
     let last: Rc<Cell<(f32, f32)>> = Rc::new(Cell::new((0.0, 0.0)));
 
@@ -234,33 +239,60 @@ fn install_pointer(canvas: &HtmlCanvasElement, render: Worker) -> Result<(), JsV
     canvas.add_event_listener_with_callback("pointercancel", up.as_ref().unchecked_ref())?;
     up.forget();
 
-    let render_move = render.clone();
     let mv = Closure::<dyn FnMut(web_sys::PointerEvent)>::new(
-        clone!(dragging, last => move |e: web_sys::PointerEvent| {
+        clone!(dragging, last, camera, dirty => move |e: web_sys::PointerEvent| {
             if !dragging.get() {
                 return;
             }
             let (lx, ly) = last.get();
             let (x, y) = (e.client_x() as f32, e.client_y() as f32);
             last.set((x, y));
-            if let Ok(v) = serde_wasm_bindgen::to_value(&CameraMsg::Orbit { dx: x - lx, dy: y - ly }) {
-                let _ = render_move.post_message(&v);
-            }
+            camera.borrow_mut().orbit(x - lx, y - ly);
+            dirty.set(true);
         }),
     );
     canvas.add_event_listener_with_callback("pointermove", mv.as_ref().unchecked_ref())?;
     mv.forget();
 
-    let wheel = Closure::<dyn FnMut(web_sys::WheelEvent)>::new(move |e: web_sys::WheelEvent| {
-        e.prevent_default();
-        if let Ok(v) = serde_wasm_bindgen::to_value(&CameraMsg::Zoom {
-            dy: e.delta_y() as f32,
-        }) {
-            let _ = render.post_message(&v);
-        }
-    });
+    let wheel = Closure::<dyn FnMut(web_sys::WheelEvent)>::new(
+        clone!(camera, dirty => move |e: web_sys::WheelEvent| {
+            e.prevent_default();
+            camera.borrow_mut().zoom(e.delta_y() as f32);
+            dirty.set(true);
+        }),
+    );
     canvas.add_event_listener_with_callback("wheel", wheel.as_ref().unchecked_ref())?;
     wheel.forget();
+
+    // The per-frame post. rAF timestamps are relative to this thread's time
+    // origin; the render worker compares them with its own frame times, so
+    // both are made absolute.
+    let window = web_sys::window().ok_or_else(|| JsValue::from_str("no window"))?;
+    let time_origin = window.performance().map(|p| p.time_origin()).unwrap_or(0.0);
+    type Cb = Rc<RefCell<Option<Closure<dyn FnMut(f64)>>>>;
+    let cb: Cb = Rc::new(RefCell::new(None));
+    let again = cb.clone();
+    *cb.borrow_mut() = Some(Closure::new(move |t: f64| {
+        if dirty.replace(false) {
+            let cam = camera.borrow();
+            let msg = CameraMsg::Pose {
+                t_ms: time_origin + t,
+                yaw: cam.yaw,
+                pitch: cam.pitch,
+                radius: cam.radius,
+            };
+            if let Ok(v) = serde_wasm_bindgen::to_value(&msg) {
+                let _ = render.post_message(&v);
+            }
+        }
+        if let (Some(w), Some(f)) = (web_sys::window(), again.borrow().as_ref()) {
+            let _ = w.request_animation_frame(f.as_ref().unchecked_ref());
+        }
+    }));
+    if let Some(f) = cb.borrow().as_ref() {
+        window.request_animation_frame(f.as_ref().unchecked_ref())?;
+    }
+    std::mem::forget(cb);
     Ok(())
 }
 

@@ -10,6 +10,7 @@ after each `env.step(...)`:
         env_origins=env.unwrapped.scene.env_origins,
         sidecar="panda.mujoco.json",                  # from awsm-renderer-isaac-export
         usd="/path/to/the/franka.usd",                # the SAME root USD the sim loaded
+        dt=env.unwrapped.step_dt,                     # seconds per env.step (sends step + dt)
     ).start()                                         # ws://0.0.0.0:8765
     while simulation_app.is_running():
         obs, *_ = env.step(policy(obs))
@@ -34,11 +35,14 @@ from pose_stream import PoseStreamServer, frame, sha256_file
 
 
 class IsaacLabStream:
-    def __init__(self, robot, env_origins, sidecar, usd, env_id=0, host="0.0.0.0", port=8765, every=1):
+    def __init__(self, robot, env_origins, sidecar, usd, env_id=0, host="0.0.0.0", port=8765, every=1, dt=None):
         self.robot = robot
         self.env_origins = env_origins
         self.env_id = env_id
         self.every = max(1, every)  # stream every Nth sim step
+        # Seconds per env step. With it, frames carry step + dt and the player
+        # shows each at its proper time; without it, plain frames.
+        self.dt = dt
         self.sha = sha256_file(usd)
         self.geom_frame = GeomFrame(sidecar, robot.data.body_names)
         self.server = PoseStreamServer(host, port)
@@ -55,4 +59,5 @@ class IsaacLabStream:
             return
         pose = self.robot.data.body_link_pose_w[self.env_id].cpu().numpy().copy()  # (B, 7) world, wxyz
         pose[:, :3] -= self.env_origins[self.env_id].cpu().numpy()                 # env-local
-        self.server.publish([frame(self.sha, self.geom_frame(pose))])
+        dt = self.dt * self.every if self.dt else None
+        self.server.publish([frame(self.sha, self.geom_frame(pose), self.steps // self.every, dt)])

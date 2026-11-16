@@ -8,9 +8,12 @@
 //!
 //! 1. reports the scene's sim instances (model name, fingerprint, geom count)
 //!    to main, which sizes the pose block for exactly those robots;
-//! 2. each frame, copies the latest stable snapshot out of the block (seqlock —
-//!    see [`crate::protocol`]) and hands each robot's span to
-//!    `scene_loader::mujoco::apply_geom_poses`.
+//! 2. each frame, interpolates every robot at the frame's own time between the
+//!    two time-stamped samples around it in the robot's ring (see
+//!    [`crate::protocol`]), and hands the result to
+//!    `scene_loader::mujoco::apply_geom_poses`. Rendering is paced by the
+//!    display's clock alone: how evenly the pose worker's timers or the network
+//!    delivered the samples never shows.
 //!
 //! The pose worker already refused any capture or stream frame whose
 //! fingerprint does not match its robot, so what arrives here is bound.
@@ -23,7 +26,11 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::js_sys;
 
-use crate::protocol::{CameraMsg, InstanceInfo, RenderMsg, ResizeMsg, POSE_HEADER, POSE_STRIDE};
+use crate::camera::{CameraFeed, CameraMsg, OrbitCamera};
+use crate::protocol::{
+    ring_offsets, slot_bytes, InstanceInfo, RenderMsg, ResizeMsg, POSE_STRIDE, RING_SLOTS,
+    SLOT_POSES,
+};
 
 /// The boxed RAF callback, self-referenced so the render loop can reschedule
 /// itself each frame (and stays alive for the worker's lifetime).
@@ -34,55 +41,66 @@ const CAMERA_FOV_Y_DEG: f32 = 55.0;
 const CAMERA_NEAR: f32 = 0.05;
 const CAMERA_FAR: f32 = 400.0;
 
-/// A minimal mouse-driven orbit camera: drag to orbit, wheel to dolly.
-struct OrbitCamera {
-    look_at: Vec3,
-    radius: f32,
-    yaw: f32,
-    pitch: f32,
-}
-
-impl OrbitCamera {
-    const SENSITIVITY: f32 = 0.008;
-    const PITCH_MAX: f32 = std::f32::consts::FRAC_PI_2 - 0.01;
-    const PITCH_MIN: f32 = 0.02;
-    const MIN_RADIUS: f32 = 0.8;
-    const MAX_RADIUS: f32 = 20.0;
-
-    fn orbit(&mut self, dx: f32, dy: f32) {
-        self.yaw -= dx * Self::SENSITIVITY;
-        self.pitch = (self.pitch - dy * Self::SENSITIVITY).clamp(Self::PITCH_MIN, Self::PITCH_MAX);
-    }
-
-    fn zoom(&mut self, dy: f32) {
-        self.radius = (self.radius * (1.0 + dy * 0.001)).clamp(Self::MIN_RADIUS, Self::MAX_RADIUS);
-    }
-
-    fn eye(&self) -> Vec3 {
-        let (sy, cy) = self.yaw.sin_cos();
-        let (sp, cp) = self.pitch.sin_cos();
-        self.look_at
-            + Vec3::new(
-                self.radius * cp * sy,
-                self.radius * sp,
-                self.radius * cp * cy,
-            )
-    }
-}
-
 /// The live link between the pose block and the scene's robots.
 struct PoseLink {
-    /// Each robot's loader-resolved instance and its span in the block
-    /// (offset in f32 slots from the start of the pose span).
-    robots: Vec<(awsm_renderer_scene_loader::mujoco::MujocoInstance, usize)>,
-    /// i32 view over the whole block (seq at 0).
-    header: js_sys::Int32Array,
-    /// f32 view over the pose span (`POSE_HEADER..`).
-    poses: js_sys::Float32Array,
-    /// Copy target for one stable snapshot.
-    scratch: Vec<f32>,
-    /// Last successfully applied seq — skip work when nothing new arrived.
-    last_seq: i32,
+    robots: Vec<RobotRing>,
+    /// i32 view over the whole block: the slots' seq words.
+    words: js_sys::Int32Array,
+    /// f64 view over the whole block: the slots' times.
+    times: js_sys::Float64Array,
+}
+
+/// One robot's ring of time-stamped samples in the block.
+struct RobotRing {
+    /// The loader-resolved instance the poses drive.
+    instance: awsm_renderer_scene_loader::mujoco::MujocoInstance,
+    /// Byte offset of slot 0, and the byte size of a slot.
+    base: usize,
+    slot_bytes: usize,
+    /// f32 view of each slot's poses (built once, so a frame makes no views).
+    poses: Vec<js_sys::Float32Array>,
+    /// Copy targets for the two samples, and the blend of them.
+    a: Vec<f32>,
+    b: Vec<f32>,
+    out: Vec<f32>,
+    /// What was applied last frame (slot seqs + blend factor): unchanged means
+    /// nothing to do.
+    last: Option<(i32, i32, u32)>,
+}
+
+/// A refresh-period estimate from the render loop's own frame intervals (the
+/// median of the recent ones), for the camera's selection rule.
+struct FramePeriod {
+    prev: Option<f64>,
+    gaps: std::collections::VecDeque<f64>,
+}
+
+impl FramePeriod {
+    fn new() -> Self {
+        Self {
+            prev: None,
+            gaps: std::collections::VecDeque::new(),
+        }
+    }
+
+    /// Records a frame at `t` and returns the period (ms).
+    fn frame(&mut self, t: f64) -> f64 {
+        if let Some(prev) = self.prev.replace(t) {
+            let gap = t - prev;
+            if gap > 0.0 && gap < 100.0 {
+                if self.gaps.len() == 16 {
+                    self.gaps.pop_front();
+                }
+                self.gaps.push_back(gap);
+            }
+        }
+        let mut sorted: Vec<f64> = self.gaps.iter().copied().collect();
+        sorted.sort_by(f64::total_cmp);
+        sorted
+            .get(sorted.len() / 2)
+            .copied()
+            .unwrap_or(1000.0 / 60.0)
+    }
 }
 
 /// Worker entry: unpack the transferred `OffscreenCanvas` + page origin, build
@@ -242,18 +260,16 @@ async fn run(
     post_progress("gpu commit complete — waiting for poses…");
 
     // ── Camera + shared state, then hand control to the event loop ──────────
-    let camera = Rc::new(RefCell::new(OrbitCamera {
-        look_at: Vec3::new(-0.1, 0.45, 0.0),
-        radius: 2.7,
-        yaw: 0.45,
-        pitch: 0.22,
-    }));
+    // The camera state comes from main (see `crate::camera`); until the first
+    // one arrives, the same default main starts from.
+    let camera = Rc::new(RefCell::new(OrbitCamera::default()));
+    let feed = Rc::new(RefCell::new(CameraFeed::default()));
     #[allow(clippy::arc_with_non_send_sync)]
     let cell = Rc::new(RefCell::new(renderer));
     let link: Rc<RefCell<Option<PoseLink>>> = Rc::new(RefCell::new(None));
     let pending = Rc::new(RefCell::new(Some(instances)));
 
-    install_onmessage(link.clone(), pending, camera.clone(), canvas.clone())?;
+    install_onmessage(link.clone(), pending, feed.clone(), canvas.clone())?;
     // Only now is the worker listening — main allocates the pose block from
     // this message.
     post_to_main(&RenderMsg::SceneReady { instances: infos });
@@ -266,15 +282,28 @@ async fn run(
     let mut frame_count: u32 = 0;
     // Presented frames and their timing, for the page's Stats panel.
     let mut frame_window = crate::stats::FrameWindow::new();
+    let mut period = FramePeriod::new();
+    // The page clock every thread shares (absolute ms): pose samples and
+    // camera states are stamped on it.
+    let time_origin = js_sys::global()
+        .dyn_into::<web_sys::WorkerGlobalScope>()
+        .ok()
+        .and_then(|g| g.performance())
+        .map(|p| p.time_origin())
+        .unwrap_or(0.0);
 
     *raf_init.borrow_mut() = Some(Closure::new(move |vsync_ms: f64| {
         let frame_start = crate::stats::worker_now();
         let mut r = cell.borrow_mut();
 
+        let frame_t = time_origin + vsync_ms;
+        let period_ms = period.frame(vsync_ms);
         if let Some(l) = link.borrow_mut().as_mut() {
-            apply_poses(&mut r, l);
+            apply_poses(&mut r, l, frame_t);
         }
 
+        feed.borrow()
+            .pick(&mut camera.borrow_mut(), frame_t, period_ms);
         let cam = camera.borrow();
         let view = Mat4::look_at_rh(cam.eye(), cam.look_at, Vec3::Y);
         let mut params =
@@ -308,27 +337,139 @@ async fn run(
     Ok(())
 }
 
-/// Copy the latest stable snapshot out of the seqlock'd block and hand each
-/// robot its span. On a torn read (seq odd / changed under us) keep last
-/// frame's poses — the next frame catches up.
+/// Shows every robot at `t_ms` (absolute): the two samples around it in the
+/// robot's ring, blended — positions lerp, rotations nlerp. Past the newest
+/// sample the robot holds it (no extrapolation); before the oldest (the first
+/// frames) it shows the oldest.
 ///
-/// The entire per-frame cost of the integration: a seqlock read and one sink
-/// call per robot. Every geom-to-node decision was made at import time.
-fn apply_poses(r: &mut awsm_renderer::AwsmRenderer, l: &mut PoseLink) {
-    let seq0 = js_sys::Atomics::load(&l.header, 0).unwrap_or(0);
-    if seq0 == l.last_seq || seq0 % 2 != 0 || seq0 == 0 {
-        return;
+/// Each slot is read under its own seqlock: seq, then the data, then seq
+/// again, and a slot that was being written is skipped for this frame (the
+/// robot keeps last frame's pose). The writer works several slots ahead of the
+/// pair read here, so that is rare, and nothing ever waits.
+fn apply_poses(r: &mut awsm_renderer::AwsmRenderer, l: &mut PoseLink, t_ms: f64) {
+    for ring in &mut l.robots {
+        if ring.sample(&l.words, &l.times, t_ms) {
+            if let Err(err) =
+                awsm_renderer_scene_loader::mujoco::apply_geom_poses(r, &ring.instance, &ring.out)
+            {
+                tracing::warn!("pose sink ({}): {err}", ring.instance.source.filename);
+            }
+        }
     }
-    l.poses.copy_to(&mut l.scratch[..]);
-    let seq1 = js_sys::Atomics::load(&l.header, 0).unwrap_or(-1);
-    if seq0 != seq1 {
-        return; // torn — the writer was mid-publish
+}
+
+impl RobotRing {
+    fn seq_index(&self, k: usize) -> u32 {
+        ((self.base + k * self.slot_bytes) / 4) as u32
     }
-    l.last_seq = seq0;
-    for (instance, offset) in &l.robots {
-        let span = &l.scratch[*offset..*offset + instance.geoms.len() * POSE_STRIDE];
-        if let Err(err) = awsm_renderer_scene_loader::mujoco::apply_geom_poses(r, instance, span) {
-            tracing::warn!("pose sink ({}): {err}", instance.source.filename);
+
+    /// `(seq, t_ms)` of slot `k` if it holds a stable sample.
+    fn stamp(
+        &self,
+        words: &js_sys::Int32Array,
+        times: &js_sys::Float64Array,
+        k: usize,
+    ) -> Option<(i32, f64)> {
+        let seq = js_sys::Atomics::load(words, self.seq_index(k)).ok()?;
+        if seq == 0 || seq % 2 != 0 {
+            return None; // never written, or being written
+        }
+        let t = times.get_index(((self.base + k * self.slot_bytes + 8) / 8) as u32);
+        (js_sys::Atomics::load(words, self.seq_index(k)).ok()? == seq).then_some((seq, t))
+    }
+
+    /// Copies slot `k`'s poses into `into`; false if the slot changed meanwhile.
+    fn copy(&self, words: &js_sys::Int32Array, k: usize, seq: i32, into: &mut [f32]) -> bool {
+        self.poses[k].copy_to(into);
+        js_sys::Atomics::load(words, self.seq_index(k)).ok() == Some(seq)
+    }
+
+    /// Puts the poses to show at `t_ms` into `out`; false to keep last frame's.
+    fn sample(
+        &mut self,
+        words: &js_sys::Int32Array,
+        times: &js_sys::Float64Array,
+        t_ms: f64,
+    ) -> bool {
+        let mut older: Option<(usize, i32, f64)> = None;
+        let mut newer: Option<(usize, i32, f64)> = None;
+        let mut oldest: Option<(usize, i32, f64)> = None;
+        for k in 0..RING_SLOTS {
+            let Some((seq, t)) = self.stamp(words, times, k) else {
+                continue;
+            };
+            if t <= t_ms {
+                if older.is_none_or(|(_, _, o)| t > o) {
+                    older = Some((k, seq, t));
+                }
+            } else if newer.is_none_or(|(_, _, n)| t < n) {
+                newer = Some((k, seq, t));
+            }
+            if oldest.is_none_or(|(_, _, o)| t < o) {
+                oldest = Some((k, seq, t));
+            }
+        }
+        let ((ka, sa, ta), (kb, sb, tb)) = match (older, newer) {
+            (Some(o), Some(n)) => (o, n),
+            (Some(o), None) => (o, o),
+            (None, Some(_)) => match oldest {
+                Some(o) => (o, o),
+                None => return false,
+            },
+            (None, None) => return false,
+        };
+        let alpha = if kb == ka || tb <= ta {
+            0.0
+        } else {
+            ((t_ms - ta) / (tb - ta)).clamp(0.0, 1.0) as f32
+        };
+        let key = (sa, sb, alpha.to_bits());
+        if self.last == Some(key) {
+            return false;
+        }
+        let mut a = std::mem::take(&mut self.a);
+        let mut b = std::mem::take(&mut self.b);
+        let ok = self.copy(words, ka, sa, &mut a) && (kb == ka || self.copy(words, kb, sb, &mut b));
+        if ok {
+            if kb == ka {
+                self.out.copy_from_slice(&a);
+            } else {
+                blend(&a, &b, alpha, &mut self.out);
+            }
+        }
+        self.a = a;
+        self.b = b;
+        if ok {
+            self.last = Some(key);
+        }
+        ok
+    }
+}
+
+/// `a` → `b` at fraction `alpha`, per geom: positions lerp, rotations nlerp
+/// along the short arc (q and −q are the same rotation).
+fn blend(a: &[f32], b: &[f32], alpha: f32, out: &mut [f32]) {
+    for ((pa, pb), po) in a
+        .as_chunks::<POSE_STRIDE>()
+        .0
+        .iter()
+        .zip(b.as_chunks::<POSE_STRIDE>().0)
+        .zip(out.as_chunks_mut::<POSE_STRIDE>().0)
+    {
+        for k in 0..3 {
+            po[k] = pa[k] + (pb[k] - pa[k]) * alpha;
+        }
+        let dot: f32 = (3..7).map(|k| pa[k] * pb[k]).sum();
+        let sign = if dot < 0.0 { -1.0 } else { 1.0 };
+        let mut len = 0.0;
+        for k in 3..7 {
+            po[k] = pa[k] * (1.0 - alpha) + sign * pb[k] * alpha;
+            len += po[k] * po[k];
+        }
+        let len = len.sqrt();
+        let len = if len > 0.0 { len } else { 1.0 };
+        for v in &mut po[3..7] {
+            *v /= len;
         }
     }
 }
@@ -336,7 +477,7 @@ fn apply_poses(r: &mut awsm_renderer::AwsmRenderer, l: &mut PoseLink) {
 fn install_onmessage(
     link: Rc<RefCell<Option<PoseLink>>>,
     pending: Rc<RefCell<Option<Vec<awsm_renderer_scene_loader::mujoco::MujocoInstance>>>>,
-    camera: Rc<RefCell<OrbitCamera>>,
+    feed: Rc<RefCell<CameraFeed>>,
     canvas: web_sys::OffscreenCanvas,
 ) -> Result<(), JsValue> {
     let scope = js_sys::global().unchecked_into::<web_sys::DedicatedWorkerGlobalScope>();
@@ -354,25 +495,39 @@ fn install_onmessage(
             let Ok(sab) = js_sys::Reflect::get(&data, &JsValue::from_str("sab")) else {
                 return;
             };
-            let total: usize = instances.iter().map(|i| i.geoms.len()).sum();
-            let mut offset = 0;
+            let geoms: Vec<usize> = instances.iter().map(|i| i.geoms.len()).collect();
+            let (offsets, _) = ring_offsets(&geoms);
             let robots = instances
                 .into_iter()
-                .map(|i| {
-                    let at = offset;
-                    offset += i.geoms.len() * POSE_STRIDE;
-                    (i, at)
+                .zip(offsets)
+                .map(|(instance, base)| {
+                    let n = instance.geoms.len() * POSE_STRIDE;
+                    let bytes = slot_bytes(instance.geoms.len());
+                    let poses = (0..RING_SLOTS)
+                        .map(|k| {
+                            js_sys::Float32Array::new_with_byte_offset_and_length(
+                                &sab,
+                                (base + k * bytes + SLOT_POSES) as u32,
+                                n as u32,
+                            )
+                        })
+                        .collect();
+                    RobotRing {
+                        instance,
+                        base,
+                        slot_bytes: bytes,
+                        poses,
+                        a: vec![0.0; n],
+                        b: vec![0.0; n],
+                        out: vec![0.0; n],
+                        last: None,
+                    }
                 })
                 .collect();
             *link.borrow_mut() = Some(PoseLink {
                 robots,
-                header: js_sys::Int32Array::new(&sab),
-                poses: js_sys::Float32Array::new(&sab).subarray(
-                    POSE_HEADER as u32,
-                    (POSE_HEADER + total * POSE_STRIDE) as u32,
-                ),
-                scratch: vec![0.0; total * POSE_STRIDE],
-                last_seq: 0,
+                words: js_sys::Int32Array::new(&sab),
+                times: js_sys::Float64Array::new(&sab),
             });
             post_progress("pose block linked — robots driven");
             return;
@@ -386,10 +541,8 @@ fn install_onmessage(
             }
             return;
         }
-        match serde_wasm_bindgen::from_value::<CameraMsg>(data) {
-            Ok(CameraMsg::Orbit { dx, dy }) => camera.borrow_mut().orbit(dx, dy),
-            Ok(CameraMsg::Zoom { dy }) => camera.borrow_mut().zoom(dy),
-            Err(_) => {}
+        if let Ok(msg) = serde_wasm_bindgen::from_value::<CameraMsg>(data) {
+            feed.borrow_mut().push(msg);
         }
     });
     scope.set_onmessage(Some(cb.as_ref().unchecked_ref()));
@@ -424,5 +577,23 @@ fn post_to_main(msg: &RenderMsg) {
             let _ = scope.post_message(&v);
         }
         Err(e) => tracing::error!("render thread: serialize RenderMsg: {e}"),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn blend_lerps_positions_and_takes_the_short_arc() {
+        // One geom: x 0 → 2, rotation identity → identity written as -q.
+        let a = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0];
+        let b = [2.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0];
+        let mut out = [0.0; 7];
+        blend(&a, &b, 0.25, &mut out);
+        assert!((out[0] - 0.5).abs() < 1e-6);
+        // -q is the same rotation: the blend stays at identity, unit length.
+        assert!((out[3] - 1.0).abs() < 1e-6);
+        assert!(out[4..].iter().all(|v| v.abs() < 1e-6));
     }
 }

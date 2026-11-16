@@ -2,11 +2,12 @@
 //!
 //! - **pose worker → render worker**: a plain `SharedArrayBuffer` pose block
 //!   (layout below). The pose worker (`web/workers/pose-worker.js`) publishes
-//!   every robot's geom world poses; the render thread reads the latest stable
-//!   snapshot per frame and hands each robot's span to the renderer's pose
-//!   sink. The renderer knows nothing about Isaac, captures or sockets.
+//!   every robot's geom world poses as time-stamped samples; each frame the
+//!   render thread interpolates every robot at its frame time and hands the
+//!   result to the renderer's pose sink. The renderer knows nothing about Isaac, captures or sockets.
 //! - **main ↔ render worker**: small serde messages (progress, the scene's sim
-//!   instances, resize, camera gestures) — none of them per-frame.
+//!   instances, resize) and, once per main-thread frame while it moves, the
+//!   camera state (see `crate::camera`).
 //! - **main ↔ pose worker**: raw JS objects (`{kind: ...}`) — see the worker.
 //!
 //! ## Where the poses come from
@@ -23,49 +24,117 @@
 //!
 //! ## Stream frames (the WebSocket wire)
 //!
-//! One binary message per robot per step:
+//! One binary message per robot per step, in either of two forms:
 //!
 //! ```text
 //! bytes 0..32   SHA-256 of the robot's root USD file — the scene instance's
 //!               fingerprint (`source.sha256`), raw bytes
-//! bytes 32..    7 × geom_count little-endian f32: [px,py,pz,qw,qx,qy,qz] per
-//!               geom, in the sidecar's geom order (Z-up, metres, env-local)
+//! stepped form (recommended):
+//!   bytes 32..36  u32 LE  the producer's step number (monotonic)
+//!   bytes 36..40  f32 LE  seconds per step (dt)
+//!   bytes 40..    7 × geom_count little-endian f32 poses
+//! plain form (older producers):
+//!   bytes 32..    7 × geom_count little-endian f32 poses
 //! ```
+//!
+//! poses are `[px,py,pz,qw,qx,qy,qz]` per geom, in the sidecar's geom order
+//! (Z-up, metres, env-local). The two forms differ in length by 8 bytes, which
+//! is never a multiple of a geom's 28, so the length says which one arrived.
 //!
 //! The fingerprint prefix IS the binding: a frame for a model the scene does
 //! not contain, or of the wrong length, is dropped and counted, never applied
 //! to whichever robot happens to be first. Several robots share one socket.
 //!
+//! ## Timing: every sample carries the time it is shown at
+//!
+//! The renderer never shows "whatever arrived last". Every pose sample in the
+//! block carries an absolute time (`performance.timeOrigin + now`, ms — the
+//! same clock in every thread of the page), and each frame the render worker
+//! interpolates every robot between the two samples around its own frame
+//! time: positions lerp, rotations nlerp. So motion is paced by the display's
+//! clock, whatever the timers and the network did.
+//!
+//! - **replay**: the pose worker publishes each capture frame stamped with
+//!   when it is due on the loop's timeline, a little ahead of time, so the
+//!   render worker always has the pair around "now". The recorded motion is
+//!   sampled exactly at each display frame, with no added latency.
+//! - **stream**: a frame's time is `step · dt` mapped onto the page clock by
+//!   the smallest recent (arrival − step · dt) — the least-delayed arrivals
+//!   define the mapping — plus a playout delay of 2.5 steps, so ordinary
+//!   network jitter never leaves the renderer without the next sample. A
+//!   plain-form frame counts as one step, with dt estimated from arrivals.
+//!
+//! If the renderer's frame time is past the newest sample (the source stalled
+//! or the network spiked beyond the playout delay), the robot holds the newest
+//! pose; it never extrapolates.
+//!
 //! ## Pose block layout (the SharedArrayBuffer)
 //!
 //! ```text
-//! i32[0]  seq      seqlock: writer makes it ODD, writes poses, makes it EVEN
-//! i32[1]  frames   frames published (monotonic)
-//! i32[2]  source   0 = waiting, 1 = replay, 2 = live stream
-//! i32[3]  dropped  stream frames rejected (unknown fingerprint / bad length)
-//! f32[4 + (o_i + g)*7 + 0..3]   robot i, geom g: world position
-//! f32[4 + (o_i + g)*7 + 3..7]   robot i, geom g: rotation [w, x, y, z]
-//!     where o_i = geoms of robots 0..i, in the scene's instance order
+//! header (16 bytes)
+//!   i32[0]  layout   BLOCK_LAYOUT (2)
+//!   i32[1]  frames   samples published, all robots (monotonic)
+//!   i32[2]  source   0 = waiting, 1 = replay, 2 = live stream
+//!   i32[3]  dropped  stream frames rejected (unknown fingerprint / bad length)
+//! then, per robot in the scene's instance order, a ring of RING_SLOTS slots:
+//!   slot (slot_bytes(geoms) bytes, 8-byte aligned)
+//!     i32  seq    the slot's seqlock: ODD while being written, EVEN when stable
+//!     i32  —
+//!     f64  t_ms   absolute time this sample is shown at
+//!     f32  poses  7 × geoms: [px,py,pz,qw,qx,qy,qz] per geom
 //! ```
 //!
-//! Poses are raw sim world poses in the documented pose-sink convention — the
-//! block is a stream frame, so nothing is reshaped on either side of it.
+//! One writer (the pose worker) fills each robot's slots in turn; one reader
+//! (the render worker) reads seq, then the slot, then seq again, and ignores a
+//! slot that was being written. It never waits: the writer is always several
+//! slots away from the pair the reader needs.
+//!
+//! Poses are raw sim world poses in the documented pose-sink convention —
+//! nothing is reshaped on either side of the block.
 
 use serde::{Deserialize, Serialize};
 
-/// f32 slots per geom in the pose block: pos xyz + quat wxyz.
+/// f32 values per geom: pos xyz + quat wxyz.
 pub const POSE_STRIDE: usize = 7;
-/// i32/f32 header slots before the pose span.
-pub const POSE_HEADER: usize = 4;
-
+/// Byte size of the block header.
+pub const HEADER_BYTES: usize = 16;
+/// `i32[0]` of the header: the layout this code reads and writes.
+pub const BLOCK_LAYOUT: i32 = 2;
 /// Header slot: what is feeding the block.
 pub const HEADER_SOURCE: u32 = 2;
 /// Header slot: rejected stream frames.
 pub const HEADER_DROPPED: u32 = 3;
+/// Samples kept per robot. At 30 Hz that is 266 ms of motion: the pair the
+/// renderer needs, the replay's lead and the stream's playout delay fit with
+/// room to spare, so the writer never reaches the slots being read.
+pub const RING_SLOTS: usize = 8;
+/// Byte offset of the poses inside a slot (after seq, padding and t_ms).
+pub const SLOT_POSES: usize = 16;
+
+/// Byte size of one ring slot for a robot with `geoms` geoms (8-aligned, so
+/// every slot's `t_ms` is an aligned f64).
+pub fn slot_bytes(geoms: usize) -> usize {
+    (SLOT_POSES + geoms * POSE_STRIDE * 4).div_ceil(8) * 8
+}
+
+/// Byte offset of each robot's ring, and the total size of the block, for
+/// robots with `geoms` geoms each.
+pub fn ring_offsets(geoms: &[usize]) -> (Vec<usize>, usize) {
+    let mut at = HEADER_BYTES;
+    let offsets = geoms
+        .iter()
+        .map(|g| {
+            let here = at;
+            at += RING_SLOTS * slot_bytes(*g);
+            here
+        })
+        .collect();
+    (offsets, at)
+}
 
 /// Byte size of the pose block for robots with `geoms` geoms each.
 pub fn pose_block_bytes(geoms: &[usize]) -> usize {
-    (POSE_HEADER + geoms.iter().sum::<usize>() * POSE_STRIDE) * 4
+    ring_offsets(geoms).1
 }
 
 /// One sim instance in the loaded scene, as the pose worker needs to know it.
@@ -114,20 +183,19 @@ pub enum ResizeMsg {
     Canvas { width: u32, height: u32 },
 }
 
-/// Main → render worker: orbit-camera gestures.
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub enum CameraMsg {
-    Orbit { dx: f32, dy: f32 },
-    Zoom { dy: f32 },
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn the_block_holds_every_robot_after_the_header() {
-        assert_eq!(pose_block_bytes(&[]), 16);
-        assert_eq!(pose_block_bytes(&[44, 64]), (4 + 108 * 7) * 4);
+    fn the_block_holds_a_ring_per_robot_after_the_header() {
+        assert_eq!(pose_block_bytes(&[]), HEADER_BYTES);
+        // 16 + 44·28 = 1248 (already 8-aligned); 16 + 63·28 = 1780 → 1784.
+        assert_eq!(slot_bytes(44), 1248);
+        assert_eq!(slot_bytes(63), 1784);
+        let (offsets, total) = ring_offsets(&[44, 63]);
+        assert_eq!(offsets, vec![16, 16 + 8 * 1248]);
+        assert_eq!(total, 16 + 8 * 1248 + 8 * 1784);
+        assert!(offsets.iter().all(|o| o % 8 == 0));
     }
 }

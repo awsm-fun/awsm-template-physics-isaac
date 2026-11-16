@@ -4,7 +4,14 @@ One binary message per robot per step:
 
     bytes 0..32   raw SHA-256 of the robot's root USD (the scene instance's
                   fingerprint, `source.sha256` in its .mujoco.json)
-    bytes 32..    7 x geom_count little-endian f32 [px,py,pz,qw,qx,qy,qz]
+    bytes 32..36  u32 LE  step number (monotonic)       } the "stepped" form;
+    bytes 36..40  f32 LE  seconds per step (dt)          } omitted in the plain form
+    then          7 x geom_count little-endian f32 [px,py,pz,qw,qx,qy,qz]
+
+Send the stepped form when you can: the player maps step x dt onto its own
+clock and shows each frame at its proper time, so network jitter never reaches
+the screen. Plain frames still work; the player then counts each one as a step
+and estimates dt from how often they arrive.
 
 `PoseStreamServer` runs a WebSocket server on a background thread, so a sim
 loop only calls `publish(...)` and never blocks on the network. Every
@@ -16,6 +23,7 @@ Needs `websockets` (pip install websockets).
 
 import asyncio
 import hashlib
+import struct
 import threading
 
 from websockets.asyncio.server import serve
@@ -30,12 +38,15 @@ def sha256_file(path):
     return h.hexdigest()
 
 
-def frame(sha256_hex, payload):
-    """Prefix a 7 x geom_count f32 payload with its robot's fingerprint."""
+def frame(sha256_hex, payload, step=None, dt=None):
+    """Prefix a 7 x geom_count f32 payload with its robot's fingerprint and,
+    given `step` and `dt` (seconds per step), the step header."""
     sha = bytes.fromhex(sha256_hex)
     if len(sha) != 32:
         raise ValueError(f"not a SHA-256: {sha256_hex!r}")
-    return sha + bytes(payload)
+    if step is None or dt is None:
+        return sha + bytes(payload)
+    return sha + struct.pack("<If", step & 0xFFFFFFFF, dt) + bytes(payload)
 
 
 class PoseStreamServer:
