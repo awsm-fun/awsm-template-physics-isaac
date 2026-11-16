@@ -101,6 +101,13 @@ clang works as-is.
 Open it in a browser with **WebGPU** and **`SharedArrayBuffer`** (recent
 Chrome/Edge). Drag to orbit, wheel to zoom.
 
+The **Stats** button (bottom left) opens a small panel (top right): the
+display's refresh rate (measured on the main thread, since no browser API
+reports it), frames per second, **missed frames** (refreshes that showed no new
+frame, per second and in total), and the render worker's CPU time per frame.
+It is off by default and remembers its state; **Settings** (bottom right) holds
+the render resolution. The panel is `packages/frontend/src/stats.rs`.
+
 ### Live stream, locally
 
 ```sh
@@ -117,7 +124,7 @@ robots hold their last pose while the page reconnects.
 
 | thread | code | role |
 |---|---|---|
-| **Main** | `src/main_thread.rs` | DOM (Dominator), spawns both workers, brokers startup. |
+| **Main** | `src/main_thread.rs` | DOM (Dominator), spawns both workers, brokers startup. The Stats panel is `src/stats.rs`. |
 | **Render** | `src/render_thread.rs` | `awsm-renderer` on an `OffscreenCanvas`. Loads the player bundle, then each frame applies every robot's poses with `scene_loader::mujoco::apply_geom_poses`. |
 | **Pose worker** | `web/workers/pose-worker.js` | The pose *source*: replays captures or reads the socket, and publishes into a `SharedArrayBuffer` pose block. |
 

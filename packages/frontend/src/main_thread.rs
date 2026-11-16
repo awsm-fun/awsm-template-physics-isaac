@@ -69,6 +69,13 @@ fn setup(
     errors: Mutable<String>,
 ) -> Result<(), JsValue> {
     let window = web_sys::window().ok_or_else(|| JsValue::from_str("no window"))?;
+    // Take keyboard focus (the Settings modal closes on Escape). The page is
+    // usually embedded in an iframe on awsm.fun; a click on the canvas focuses
+    // it too, since no pointer handler here cancels the press.
+    let _ = window.focus();
+
+    // The Stats chip + panel (see `crate::stats`), fed by the render worker.
+    let stats = crate::stats::Stats::install(&window, "awsm_isaac_stats");
 
     // Backing store at the chosen render resolution (a stored Settings choice,
     // else native capped at a pixel budget — see `resolution`). Must be sized
@@ -139,7 +146,7 @@ fn setup(
         Rc::new(std::cell::RefCell::new(None));
     let started = Rc::new(Cell::new(false));
     let on_render_msg = Closure::<dyn FnMut(MessageEvent)>::new(clone!(
-        status, render_cell, started, pose => move |e: MessageEvent| {
+        status, render_cell, started, pose, stats => move |e: MessageEvent| {
             match serde_wasm_bindgen::from_value::<RenderMsg>(e.data()) {
                 Ok(RenderMsg::Progress { message }) => loading_log(&message),
                 Ok(RenderMsg::SceneReady { instances }) => {
@@ -170,7 +177,11 @@ fn setup(
                 Ok(RenderMsg::Ready) => {
                     loading_log("first frames rendered — ready");
                     loading_done();
+                    stats.mark_ready();
                     status.set("running — drag orbits, wheel zooms".into());
+                }
+                Ok(RenderMsg::Stats { frames, span_ms, cpu_ms }) => {
+                    stats.window(frames, span_ms, cpu_ms);
                 }
                 Ok(RenderMsg::Error { message }) => {
                     loading_log(&format!("ERROR: {message}"));
