@@ -26,6 +26,7 @@
 //! This is the same "pose sink" shape as the `physics-mujoco` template, minus
 //! the simulator: the renderer never learns what produced the poses.
 
+pub mod about;
 pub mod bootstrap;
 pub mod camera;
 pub mod main_thread;

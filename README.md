@@ -148,7 +148,10 @@ each must fit the budget on its own; they do not add up, except when the CPU
 waits on the GPU, which shows as missed frames. Late frames that keep happening
 turn the pose group red. The panel is off by default and remembers its state;
 `?reset` forgets every stored setting. **Settings** (bottom right) holds the
-render resolution. The panel is `packages/frontend/src/stats.rs`.
+render resolution. **About** (bottom centre) says what the demo is and, on its
+Stats tab, what every number in the panel means (the panel's `what do these
+mean?` opens it there). The panel is `packages/frontend/src/stats.rs`, the
+About modal `packages/frontend/src/about.rs`.
 
 ### Live stream, locally
 

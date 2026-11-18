@@ -559,7 +559,13 @@ impl Stats {
     /// `prefix` is this app's `localStorage` prefix: `<prefix>stats` remembers
     /// whether the panel is open, `<prefix>stats_open_<group>` each group.
     /// `stream`: the poses come from a live stream rather than the replay.
-    pub fn install(window: &web_sys::Window, prefix: &'static str, stream: bool) -> Rc<Self> {
+    /// `on_help` explains the numbers (the panel's `what do these mean?`).
+    pub fn install(
+        window: &web_sys::Window,
+        prefix: &'static str,
+        stream: bool,
+        on_help: impl Fn() + 'static,
+    ) -> Rc<Self> {
         let group = |id, label| Group::new(window, prefix, id, label);
         let stats = Rc::new(Self {
             // Off by default: on a phone the panel covers a lot of the screen.
@@ -598,6 +604,12 @@ impl Stats {
                 .child(html!("div", {
                     .class("stats")
                     .visible_signal(panel.signal())
+                    .child(html!("button", {
+                        .class("stats-help")
+                        .attr("type", "button")
+                        .text("what do these mean?")
+                        .event(move |_: dominator::events::Click| on_help())
+                    }))
                     .children(stats.groups().map(|g| g.dom(prefix)))
                 }))
                 .child(html!("button", {
