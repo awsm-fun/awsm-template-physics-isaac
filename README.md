@@ -124,12 +124,29 @@ clang works as-is.
 Open it in a browser with **WebGPU** and **`SharedArrayBuffer`** (recent
 Chrome/Edge). Drag to orbit, wheel to zoom.
 
-The **Stats** button (bottom left) opens a small panel (top right): the
-display's refresh rate (measured on the main thread, since no browser API
-reports it), frames per second, **missed frames** (refreshes that showed no new
-frame, per second and in total), and the render worker's CPU time per frame.
-It is off by default and remembers its state; **Settings** (bottom right) holds
-the render resolution. The panel is `packages/frontend/src/stats.rs`.
+The **Stats** button (bottom left) opens a small panel (top right) with one
+group per thread, each number under the thread that spent it, with its unit
+and what it is per:
+
+| Group | Headline | Rows when expanded |
+|---|---|---|
+| `display` | refresh rate · fps | refresh rate (measured on the main thread, since no browser API reports it), frames presented, **missed frames** (refreshes that showed no new frame) |
+| `GPU` | GPU time per frame (timestamp queries; `n/a` without them) | one row per pass, slowest first; on GPUs that overlap passes (Apple's) they add up to more than the frame |
+| `renderer (render worker)` | the render worker's CPU time per frame | its four phases (`read app state + interpolate`, `set camera`, `update transforms`, `render (encode + submit)`), with awsm-renderer's own CPU scopes under render, then `timing the passes` |
+| `poses (replay, pose worker)` or `poses (live stream, pose worker)` | samples per second per robot | samples published, **late frames** (frames past a robot's newest sample, which held it: a stalled stream), dropped stream frames (stream only) |
+| `page (main thread)` | the main thread's own work per frame | its two animation-frame loops: `camera frame loop`, `refresh probe` |
+
+The simulation itself runs outside the page (or not at all, in replay), so
+the pose group shows only what the page can measure: there is no step time.
+Click a group to expand it; each remembers its state. Expanding a group is
+what turns on its extra timing (the renderer's per-pass CPU scopes, the phase
+clocks, the per-pass GPU numbers), so a collapsed group, or a hidden panel,
+costs nothing. The renderer's per-pass CPU timers are expensive in a
+worker, so they run on one frame in sixteen, and what they add to the average
+frame is listed as `timing the passes`. Late frames that keep happening turn the pose group red. The
+panel is off by default and remembers its state; `?reset` forgets every
+stored setting. **Settings** (bottom right) holds the render resolution. The
+panel is `packages/frontend/src/stats.rs`.
 
 ### Live stream, locally
 

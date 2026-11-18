@@ -18,7 +18,7 @@ use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 
 use dominator::{clone, html};
-use futures_signals::signal::Mutable;
+use futures_signals::signal::{Mutable, SignalExt};
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::js_sys;
@@ -26,7 +26,12 @@ use web_sys::{HtmlCanvasElement, MessageEvent, Worker, WorkerOptions, WorkerType
 
 use crate::bootstrap::spawn_shared_worker_transfer;
 use crate::camera::{CameraMsg, OrbitCamera};
-use crate::protocol::{pose_block_bytes, RenderMsg};
+use crate::protocol::{pose_block_bytes, ProfileMsg, RenderMsg};
+use crate::stats::Stats;
+
+/// Every `localStorage` key this app writes starts with this (the CDN origin is
+/// shared with other experiments).
+const STORAGE_PREFIX: &str = "awsm_isaac_";
 
 /// Build + mount the DOM, then start the worker pipeline.
 pub fn start() -> Result<(), JsValue> {
@@ -75,9 +80,11 @@ fn setup(
     // usually embedded in an iframe on awsm.fun; a click on the canvas focuses
     // it too, since no pointer handler here cancels the press.
     let _ = window.focus();
+    maybe_reset_settings(&window);
+    let stream_url = query(&window, "stream");
 
     // The Stats chip + panel (see `crate::stats`), fed by the render worker.
-    let stats = crate::stats::Stats::install(&window, "awsm_isaac_stats");
+    let stats = Stats::install(&window, STORAGE_PREFIX, stream_url.is_some());
 
     // Backing store at the chosen render resolution (a stored Settings choice,
     // else native capped at a pixel budget — see `resolution`). Must be sized
@@ -87,7 +94,6 @@ fn setup(
 
     let base = page_base(&window);
     let app_base = app_base(&window);
-    let stream_url = query(&window, "stream");
 
     // ── Pose worker (plain JS module worker) ────────────────────────────────
     loading_log("spawning pose worker…");
@@ -154,6 +160,11 @@ fn setup(
                     if started.replace(true) {
                         return;
                     }
+                    // The worker listens from now on: tell it which Stats
+                    // groups are expanded (later changes follow, below).
+                    if let Some(render) = render_cell.borrow().as_ref() {
+                        post_profile(render, &stats);
+                    }
                     let geoms: Vec<usize> = instances.iter().map(|i| i.geoms).collect();
                     loading_log(&format!(
                         "scene ready — {} robot(s): {}",
@@ -181,9 +192,7 @@ fn setup(
                     stats.mark_ready();
                     status.set("running — drag orbits, wheel zooms".into());
                 }
-                Ok(RenderMsg::Stats { frames, span_ms, cpu_ms }) => {
-                    stats.window(frames, span_ms, cpu_ms);
-                }
+                Ok(RenderMsg::Stats(report)) => stats.window(report),
                 Ok(RenderMsg::Error { message }) => {
                     loading_log(&format!("ERROR: {message}"));
                     status.set(format!("render error: {message}"));
@@ -202,10 +211,18 @@ fn setup(
     )?;
     on_render_msg.forget();
     *render_cell.borrow_mut() = Some(render.clone());
+    wasm_bindgen_futures::spawn_local(stats.profile_signal().for_each(
+        clone!(render, started, stats => move |_| {
+            if started.get() {
+                post_profile(&render, &stats);
+            }
+            async {}
+        }),
+    ));
 
     // Layout changes → ResizeMsg, plus the Settings modal (resolution slider).
     resolution.install(&window, &canvas, render.clone())?;
-    install_pointer(&canvas, render)?;
+    install_pointer(&canvas, render, stats)?;
 
     status.set("loading scene…".into());
     Ok(())
@@ -215,7 +232,11 @@ fn setup(
 /// each main-thread frame in which it changed, its state goes to the render
 /// worker stamped with that frame's time (see `crate::camera` for why it is
 /// once per frame and not once per event).
-fn install_pointer(canvas: &HtmlCanvasElement, render: Worker) -> Result<(), JsValue> {
+fn install_pointer(
+    canvas: &HtmlCanvasElement,
+    render: Worker,
+    stats: Rc<Stats>,
+) -> Result<(), JsValue> {
     let camera = Rc::new(RefCell::new(OrbitCamera::default()));
     let dirty = Rc::new(Cell::new(false));
     let dragging = Rc::new(Cell::new(false));
@@ -273,18 +294,21 @@ fn install_pointer(canvas: &HtmlCanvasElement, render: Worker) -> Result<(), JsV
     let cb: Cb = Rc::new(RefCell::new(None));
     let again = cb.clone();
     *cb.borrow_mut() = Some(Closure::new(move |t: f64| {
-        if dirty.replace(false) {
-            let cam = camera.borrow();
-            let msg = CameraMsg::Pose {
-                t_ms: time_origin + t,
-                yaw: cam.yaw,
-                pitch: cam.pitch,
-                radius: cam.radius,
-            };
-            if let Ok(v) = serde_wasm_bindgen::to_value(&msg) {
-                let _ = render.post_message(&v);
+        // This is the page's per-frame work (the Stats panel's page group).
+        stats.time_camera(|| {
+            if dirty.replace(false) {
+                let cam = camera.borrow();
+                let msg = CameraMsg::Pose {
+                    t_ms: time_origin + t,
+                    yaw: cam.yaw,
+                    pitch: cam.pitch,
+                    radius: cam.radius,
+                };
+                if let Ok(v) = serde_wasm_bindgen::to_value(&msg) {
+                    let _ = render.post_message(&v);
+                }
             }
-        }
+        });
         if let (Some(w), Some(f)) = (web_sys::window(), again.borrow().as_ref()) {
             let _ = w.request_animation_frame(f.as_ref().unchecked_ref());
         }
@@ -294,6 +318,34 @@ fn install_pointer(canvas: &HtmlCanvasElement, render: Worker) -> Result<(), JsV
     }
     std::mem::forget(cb);
     Ok(())
+}
+
+/// Tell the render worker which Stats groups are expanded.
+fn post_profile(render: &Worker, stats: &Stats) {
+    if let Ok(v) = serde_wasm_bindgen::to_value(&ProfileMsg::Set(stats.profile())) {
+        let _ = render.post_message(&v);
+    }
+}
+
+/// `?reset` in the URL forgets every stored setting of this app (the panel,
+/// its groups, the render resolution), so the page boots with the defaults.
+/// Runs before anything reads one.
+fn maybe_reset_settings(window: &web_sys::Window) {
+    let reset = query_has(window, "reset");
+    let Some(ls) = reset
+        .then(|| window.local_storage().ok().flatten())
+        .flatten()
+    else {
+        return;
+    };
+    let keys: Vec<String> = (0..ls.length().unwrap_or(0))
+        .filter_map(|i| ls.key(i).ok().flatten())
+        .filter(|k| k.starts_with(STORAGE_PREFIX))
+        .collect();
+    for key in keys {
+        let _ = ls.remove_item(&key);
+    }
+    loading_log("?reset — stored settings cleared, booting with defaults");
 }
 
 /// Append a line to the `#loading-log` panel (the pre-Ready progress feed).
@@ -343,6 +395,16 @@ fn query(window: &web_sys::Window, key: &str) -> Option<String> {
     let search = window.location().search().ok()?;
     let params = web_sys::UrlSearchParams::new_with_str(&search).ok()?;
     params.get(key).filter(|v| !v.is_empty())
+}
+
+/// Whether the page's query string has `key` (with or without a value).
+fn query_has(window: &web_sys::Window, key: &str) -> bool {
+    window
+        .location()
+        .search()
+        .ok()
+        .and_then(|s| web_sys::UrlSearchParams::new_with_str(&s).ok())
+        .is_some_and(|p| p.has(key))
 }
 
 /// The *media* base URL: `?media=` query param → compile-time `MEDIA_BASE`

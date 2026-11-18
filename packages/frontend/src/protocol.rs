@@ -6,8 +6,9 @@
 //!   render thread interpolates every robot at its frame time and hands the
 //!   result to the renderer's pose sink. The renderer knows nothing about Isaac, captures or sockets.
 //! - **main ↔ render worker**: small serde messages (progress, the scene's sim
-//!   instances, resize) and, once per main-thread frame while it moves, the
-//!   camera state (see `crate::camera`).
+//!   instances, resize, the Stats report and which Stats groups are open)
+//!   and, once per main-thread frame while it moves, the camera state (see
+//!   `crate::camera`).
 //! - **main ↔ pose worker**: raw JS objects (`{kind: ...}`) — see the worker.
 //!
 //! ## Where the poses come from
@@ -100,6 +101,8 @@ pub const POSE_STRIDE: usize = 7;
 pub const HEADER_BYTES: usize = 16;
 /// `i32[0]` of the header: the layout this code reads and writes.
 pub const BLOCK_LAYOUT: i32 = 2;
+/// Header slot: samples published, all robots.
+pub const HEADER_FRAMES: u32 = 1;
 /// Header slot: what is feeding the block.
 pub const HEADER_SOURCE: u32 = 2;
 /// Header slot: rejected stream frames.
@@ -163,18 +166,57 @@ pub enum RenderMsg {
     },
     /// First real frames have been presented.
     Ready,
-    /// About once a second: the frames presented since the last report, the
-    /// time they covered (rAF timestamp to rAF timestamp, pauses left out),
-    /// and the render worker's CPU time for them. The Stats panel turns these
-    /// into fps, missed frames and CPU time per frame (see `crate::stats`).
-    Stats {
-        frames: u32,
-        span_ms: f64,
-        cpu_ms: f64,
-    },
+    /// About once a second, for the Stats panel (see `crate::stats`).
+    Stats(FrameReport),
     Error {
         message: String,
     },
+}
+
+/// The render worker's Stats report: one window of about a second.
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
+pub struct FrameReport {
+    /// Frames presented, and the time they covered (rAF timestamp to rAF
+    /// timestamp, pauses left out).
+    pub frames: u32,
+    pub span_ms: f64,
+    /// The render worker's CPU time for those frames (the whole frame function).
+    pub cpu_ms: f64,
+    /// Frames whose time was past a robot's newest sample, which held its
+    /// newest pose instead (the source stalled or fell behind).
+    pub late: u32,
+    /// Whether the device has timestamp queries (else no GPU numbers, ever).
+    pub gpu_available: bool,
+    /// Mean GPU time per frame over the window, when there was a sample.
+    pub gpu_ms: Option<f64>,
+    /// Only while the renderer group is open (see `crate::stats::PassSampler`):
+    /// the mean per frame of each of the frame function's phases
+    /// (`crate::stats::Phase` order), of each of awsm-renderer's CPU scopes
+    /// inside `render()`, and of what those scopes themselves cost.
+    pub phases_ms: Option<[f64; crate::stats::PHASES]>,
+    pub cpu_passes: Vec<(String, f64)>,
+    pub pass_timing_ms: Option<f64>,
+    /// Only while the GPU group is open: the mean per frame of each GPU pass.
+    pub gpu_passes: Vec<(String, f64)>,
+    /// The pose block's running counters (header `frames` and `dropped`), and
+    /// the robots it feeds; zero until the block is linked.
+    pub robots: u32,
+    pub samples: u32,
+    pub dropped: u32,
+}
+
+/// Which Stats groups are open (and the panel shown): the render worker runs
+/// the extra timing for a group only then.
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub struct Profile {
+    pub renderer: bool,
+    pub gpu: bool,
+}
+
+/// Main → render worker: see [`Profile`].
+#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
+pub enum ProfileMsg {
+    Set(Profile),
 }
 
 /// Main → render worker: canvas backing-store resize (device pixels).

@@ -18,7 +18,7 @@
 //! The pose worker already refused any capture or stream frame whose
 //! fingerprint does not match its robot, so what arrives here is bound.
 
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 
 use glam::{Mat4, Vec3};
@@ -28,9 +28,10 @@ use web_sys::js_sys;
 
 use crate::camera::{CameraFeed, CameraMsg, OrbitCamera};
 use crate::protocol::{
-    ring_offsets, slot_bytes, InstanceInfo, RenderMsg, ResizeMsg, POSE_STRIDE, RING_SLOTS,
-    SLOT_POSES,
+    ring_offsets, slot_bytes, InstanceInfo, Profile, ProfileMsg, RenderMsg, ResizeMsg,
+    HEADER_DROPPED, HEADER_FRAMES, POSE_STRIDE, RING_SLOTS, SLOT_POSES,
 };
+use crate::stats::{lap, Phase, PhaseClock};
 
 /// The boxed RAF callback, self-referenced so the render loop can reschedule
 /// itself each frame (and stays alive for the worker's lifetime).
@@ -168,6 +169,14 @@ async fn run(
             smaa: false,
             mipmap: true,
         })
+        // GPU frame timing for the Stats panel's GPU group: timestamp queries
+        // on every pass, folded into one whole-frame span (cheap; silently
+        // off without `timestamp-query`). The CPU tier stays `Off` until the
+        // renderer group is expanded.
+        .with_logging(awsm_renderer::debug::AwsmRendererLogging {
+            gpu: awsm_renderer::debug::TimingTier::Frame,
+            ..Default::default()
+        })
         .with_phase_handler(|phase| {
             use awsm_renderer::RendererLoadingPhase as P;
             let message = match phase {
@@ -268,8 +277,16 @@ async fn run(
     let cell = Rc::new(RefCell::new(renderer));
     let link: Rc<RefCell<Option<PoseLink>>> = Rc::new(RefCell::new(None));
     let pending = Rc::new(RefCell::new(Some(instances)));
+    // Which Stats groups are expanded (main sends it on change).
+    let profile = Rc::new(Cell::new(Profile::default()));
 
-    install_onmessage(link.clone(), pending, feed.clone(), canvas.clone())?;
+    install_onmessage(
+        link.clone(),
+        pending,
+        feed.clone(),
+        canvas.clone(),
+        profile.clone(),
+    )?;
     // Only now is the worker listening — main allocates the pose block from
     // this message.
     post_to_main(&RenderMsg::SceneReady { instances: infos });
@@ -281,26 +298,36 @@ async fn run(
     let raf_run = raf.clone();
     let mut frame_count: u32 = 0;
     // Presented frames and their timing, for the page's Stats panel.
-    let mut frame_window = crate::stats::FrameWindow::new();
+    let mut frame_window = crate::stats::FrameWindow::new(cell.borrow().gpu_timestamps.is_some());
     let mut period = FramePeriod::new();
     // The page clock every thread shares (absolute ms): pose samples and
     // camera states are stamped on it.
-    let time_origin = js_sys::global()
-        .dyn_into::<web_sys::WorkerGlobalScope>()
-        .ok()
-        .and_then(|g| g.performance())
-        .map(|p| p.time_origin())
-        .unwrap_or(0.0);
+    let time_origin = crate::stats::worker_time_origin();
 
     *raf_init.borrow_mut() = Some(Closure::new(move |vsync_ms: f64| {
         let frame_start = crate::stats::worker_now();
         let mut r = cell.borrow_mut();
 
+        // The renderer group's breakdown is timed only while it is expanded,
+        // and awsm-renderer's per-pass scopes only on some of those frames.
+        frame_window.set_profile(profile.get());
+        let mut phases = frame_window.begin_frame(frame_start);
+        let tier = if phases.as_ref().is_some_and(PhaseClock::scopes) {
+            awsm_renderer::debug::TimingTier::SubFrame
+        } else {
+            awsm_renderer::debug::TimingTier::Off
+        };
+        if r.logging.cpu != tier {
+            r.logging.cpu = tier;
+        }
+
         let frame_t = time_origin + vsync_ms;
         let period_ms = period.frame(vsync_ms);
+        let mut late = false;
         if let Some(l) = link.borrow_mut().as_mut() {
-            apply_poses(&mut r, l, frame_t);
+            late = apply_poses(&mut r, l, frame_t);
         }
+        lap(&mut phases, Phase::Read);
 
         feed.borrow()
             .pick(&mut camera.borrow_mut(), frame_t, period_ms);
@@ -311,11 +338,14 @@ async fn run(
         params.focus_distance = cam.radius;
         let _ = r.set_camera(view, params);
         drop(cam);
+        lap(&mut phases, Phase::Camera);
 
         r.update_transforms();
+        lap(&mut phases, Phase::Transforms);
         if let Err(err) = r.render(None) {
             tracing::warn!("render thread: render error: {err}");
         }
+        lap(&mut phases, Phase::Render);
         drop(r);
 
         frame_count = frame_count.wrapping_add(1);
@@ -323,8 +353,13 @@ async fn run(
             post_to_main(&RenderMsg::Ready);
         }
         let cpu_ms = crate::stats::worker_now() - frame_start;
-        if let Some(msg) = frame_window.frame(vsync_ms, cpu_ms) {
-            post_to_main(&msg);
+        if let Some(mut report) = frame_window.frame(vsync_ms, cpu_ms, late, phases) {
+            if let Some(l) = link.borrow().as_ref() {
+                report.robots = l.robots.len() as u32;
+                report.samples = l.counter(HEADER_FRAMES);
+                report.dropped = l.counter(HEADER_DROPPED);
+            }
+            post_to_main(&RenderMsg::Stats(report));
         }
         if let Some(cb) = raf_run.borrow().as_ref() {
             let _ = awsm_renderer::web_global::request_animation_frame(cb.as_ref().unchecked_ref());
@@ -337,18 +372,28 @@ async fn run(
     Ok(())
 }
 
+impl PoseLink {
+    /// One of the block header's running counters.
+    fn counter(&self, index: u32) -> u32 {
+        js_sys::Atomics::load(&self.words, index).unwrap_or(0) as u32
+    }
+}
+
 /// Shows every robot at `t_ms` (absolute): the two samples around it in the
 /// robot's ring, blended — positions lerp, rotations nlerp. Past the newest
-/// sample the robot holds it (no extrapolation); before the oldest (the first
-/// frames) it shows the oldest.
+/// sample the robot holds it (no extrapolation) and the frame is late; before
+/// the oldest (the first frames) it shows the oldest.
 ///
 /// Each slot is read under its own seqlock: seq, then the data, then seq
 /// again, and a slot that was being written is skipped for this frame (the
 /// robot keeps last frame's pose). The writer works several slots ahead of the
 /// pair read here, so that is rare, and nothing ever waits.
-fn apply_poses(r: &mut awsm_renderer::AwsmRenderer, l: &mut PoseLink, t_ms: f64) {
+fn apply_poses(r: &mut awsm_renderer::AwsmRenderer, l: &mut PoseLink, t_ms: f64) -> bool {
+    let mut late = false;
     for ring in &mut l.robots {
-        if ring.sample(&l.words, &l.times, t_ms) {
+        let (changed, held) = ring.sample(&l.words, &l.times, t_ms);
+        late |= held;
+        if changed {
             if let Err(err) =
                 awsm_renderer_scene_loader::mujoco::apply_geom_poses(r, &ring.instance, &ring.out)
             {
@@ -356,6 +401,7 @@ fn apply_poses(r: &mut awsm_renderer::AwsmRenderer, l: &mut PoseLink, t_ms: f64)
             }
         }
     }
+    late
 }
 
 impl RobotRing {
@@ -384,13 +430,15 @@ impl RobotRing {
         js_sys::Atomics::load(words, self.seq_index(k)).ok() == Some(seq)
     }
 
-    /// Puts the poses to show at `t_ms` into `out`; false to keep last frame's.
+    /// Puts the poses to show at `t_ms` into `out`. Returns whether `out`
+    /// changed (else keep last frame's), and whether `t_ms` was past the
+    /// newest sample, which is held (late).
     fn sample(
         &mut self,
         words: &js_sys::Int32Array,
         times: &js_sys::Float64Array,
         t_ms: f64,
-    ) -> bool {
+    ) -> (bool, bool) {
         let mut older: Option<(usize, i32, f64)> = None;
         let mut newer: Option<(usize, i32, f64)> = None;
         let mut oldest: Option<(usize, i32, f64)> = None;
@@ -409,14 +457,15 @@ impl RobotRing {
                 oldest = Some((k, seq, t));
             }
         }
+        let late = older.is_some() && newer.is_none();
         let ((ka, sa, ta), (kb, sb, tb)) = match (older, newer) {
             (Some(o), Some(n)) => (o, n),
             (Some(o), None) => (o, o),
             (None, Some(_)) => match oldest {
                 Some(o) => (o, o),
-                None => return false,
+                None => return (false, late),
             },
-            (None, None) => return false,
+            (None, None) => return (false, late),
         };
         let alpha = if kb == ka || tb <= ta {
             0.0
@@ -425,7 +474,7 @@ impl RobotRing {
         };
         let key = (sa, sb, alpha.to_bits());
         if self.last == Some(key) {
-            return false;
+            return (false, late);
         }
         let mut a = std::mem::take(&mut self.a);
         let mut b = std::mem::take(&mut self.b);
@@ -442,7 +491,7 @@ impl RobotRing {
         if ok {
             self.last = Some(key);
         }
-        ok
+        (ok, late)
     }
 }
 
@@ -479,6 +528,7 @@ fn install_onmessage(
     pending: Rc<RefCell<Option<Vec<awsm_renderer_scene_loader::mujoco::MujocoInstance>>>>,
     feed: Rc<RefCell<CameraFeed>>,
     canvas: web_sys::OffscreenCanvas,
+    profile: Rc<Cell<Profile>>,
 ) -> Result<(), JsValue> {
     let scope = js_sys::global().unchecked_into::<web_sys::DedicatedWorkerGlobalScope>();
     let cb = Closure::<dyn FnMut(web_sys::MessageEvent)>::new(move |e: web_sys::MessageEvent| {
@@ -541,8 +591,12 @@ fn install_onmessage(
             }
             return;
         }
-        if let Ok(msg) = serde_wasm_bindgen::from_value::<CameraMsg>(data) {
+        if let Ok(msg) = serde_wasm_bindgen::from_value::<CameraMsg>(data.clone()) {
             feed.borrow_mut().push(msg);
+            return;
+        }
+        if let Ok(ProfileMsg::Set(p)) = serde_wasm_bindgen::from_value::<ProfileMsg>(data) {
+            profile.set(p);
         }
     });
     scope.set_onmessage(Some(cb.as_ref().unchecked_ref()));
