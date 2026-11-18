@@ -274,9 +274,9 @@ fn stats_tab() -> Vec<Dom> {
                    is open, so the panel costs nothing when it is closed.")
         }),
         html!("p", {
-            .child(code("ms / frame"))
+            .child(unit("ms / frame"))
             .text(" is time per rendered frame; the small ones read in µs (1000 µs = 1 ms). ")
-            .child(code("/ s"))
+            .child(unit("/ s"))
             .text(" is per second.")
         }),
         h3("frame budget"),
@@ -343,7 +343,7 @@ fn stats_tab() -> Vec<Dom> {
                 )],
             ),
         ]),
-        h3("GPU"),
+        lane_h3("GPU", "gpu"),
         dl(vec![
             (
                 "GPU time per frame",
@@ -361,7 +361,7 @@ fn stats_tab() -> Vec<Dom> {
                 )],
             ),
         ]),
-        h3("renderer (render worker)"),
+        lane_h3("renderer (render worker)", "renderer"),
         dl(vec![
             (
                 "the header",
@@ -382,7 +382,7 @@ fn stats_tab() -> Vec<Dom> {
             ),
             ("render (encode + submit)", render_dd()),
         ]),
-        h3("poses (replay, pose worker)"),
+        lane_h3("poses (replay, pose worker)", "sim"),
         html!("p", {
             .text("Called ")
             .child(code("poses (live stream, pose worker)"))
@@ -419,7 +419,7 @@ fn stats_tab() -> Vec<Dom> {
                 )],
             ),
         ]),
-        h3("page (main thread)"),
+        lane_h3("page (main thread)", "page"),
         dl(vec![(
             "camera frame loop, refresh probe",
             vec![text(
@@ -452,12 +452,29 @@ fn h3(s: &str) -> Dom {
     html!("h3", { .text(s) })
 }
 
+/// A group's heading with its lane's dot, the colour the Stats panel gives
+/// that group.
+fn lane_h3(s: &str, lane: &str) -> Dom {
+    html!("h3", {
+        .attr("data-lane", lane)
+        .text(s)
+    })
+}
+
 fn text(s: &str) -> Dom {
     dominator::text(s)
 }
 
 fn code(s: &str) -> Dom {
     html!("code", { .text(s) })
+}
+
+/// A unit as the Stats panel prints it.
+fn unit(s: &str) -> Dom {
+    html!("span", {
+        .class("about-unit")
+        .text(s)
+    })
 }
 
 fn link(href: &str, label: &str) -> Dom {
