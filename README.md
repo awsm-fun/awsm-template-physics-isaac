@@ -133,7 +133,7 @@ and what it is per:
 | `frame budget` | the refresh period and the headroom left by the largest lane (`16.7 ms (60 Hz) · headroom 9.5 ms`, or `over by …` in red) | one row per lane, `used / budget ms (n%)`: `GPU`, `renderer (render worker)`, `page (main thread)`; then `latency (renderer + GPU), reference only` |
 | `display` | refresh rate · fps | refresh rate (measured on the main thread, since no browser API reports it), frames presented, **missed frames** (refreshes that showed no new frame) |
 | `GPU` | GPU time per frame (timestamp queries; `n/a` without them) | one row per pass, slowest first; on GPUs that overlap passes (Apple's) they add up to more than the frame |
-| `renderer (render worker)` | the render worker's CPU time per frame | its four phases (`read app state + interpolate`, `set camera`, `update transforms`, `render (encode + submit)`); under render, awsm-renderer's own CPU scopes as `prepare` (uploads, bind groups, …), `passes` and `submit`, each scope slowest first (those under 1 µs folded into one row), then `outside the scopes` |
+| `renderer (render worker)` | the render worker's CPU time per frame | its five phases (`animations + particles`, `read app state + interpolate`, `set camera`, `update transforms`, `render (encode + submit)`); under render, awsm-renderer's own CPU scopes as `prepare` (uploads, bind groups, …), `passes` and `submit`, each scope slowest first (those under 1 µs folded into one row), then `outside the scopes` |
 | `poses (replay, pose worker)` or `poses (live stream, pose worker)` | samples per second per robot | samples published, **late frames** (frames past a robot's newest sample, which held it: a stalled stream), dropped stream frames (stream only) |
 | `page (main thread)` | the main thread's own work per frame | its two animation-frame loops: `camera frame loop`, `refresh probe` |
 
@@ -171,7 +171,7 @@ sends the older wire form without step numbers, which the page also accepts.
 | thread | code | role |
 |---|---|---|
 | **Main** | `src/main_thread.rs` | DOM (Dominator), spawns both workers, brokers startup. The Stats panel is `src/stats.rs`. |
-| **Render** | `src/render_thread.rs` | `awsm-renderer` on an `OffscreenCanvas`. Loads the player bundle, then each frame blends every robot's two samples around the frame time and applies the result with `scene_loader::mujoco::apply_geom_poses`. |
+| **Render** | `src/render_thread.rs` | `awsm-renderer` on an `OffscreenCanvas`. Loads the player bundle, then each frame advances the scene's clips, texture flows and particles (`update_animations`, `ParticleDriver`), blends every robot's two samples around the frame time and applies the result with `scene_loader::mujoco::apply_geom_poses` (after the clips, so the poses win). |
 | **Pose worker** | `web/workers/pose-worker.js` | The pose *source*: replays captures or reads the socket, and publishes into a `SharedArrayBuffer` pose block. |
 
 Main and render share one wasm module and one `WebAssembly.Memory` (the
@@ -216,6 +216,11 @@ for the details.
    ```
 2. **Import** `out/<name>.mujoco.json` in the scene editor (MuJoCo → import
    from URL), place it, and export a **player bundle** into `media/bundle/`.
+   The rest of the scene plays as authored: clips, texture flows and particles
+   run, and the robots' poses are applied after them (keep clips off the
+   robots' geoms: the poses own those). Anti-aliasing
+   is the template's (`ANTI_ALIASING` in `src/render_thread.rs`), not the
+   bundle's.
 3. **Record** a capture, or stream from Isaac Lab:
    ```sh
    cargo run --release -p awsm-renderer-isaac-export-cli \

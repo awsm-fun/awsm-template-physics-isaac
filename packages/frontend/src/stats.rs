@@ -93,16 +93,20 @@ const GAP_MS: f64 = 250.0;
 /// The frame function's phases, in the order they run.
 #[derive(Clone, Copy)]
 pub enum Phase {
-    /// Everything up to the transforms being written: reading and blending
-    /// every robot's two samples and writing its geom transforms.
+    /// The scene's authored clips, texture UV flows and particles
+    /// (`update_animations`, `ParticleDriver::tick`).
+    Animate,
+    /// Reading and blending every robot's two samples and writing its geom
+    /// transforms: after `Animate`, so the poses win on their nodes.
     Read,
     Camera,
     Transforms,
     /// `AwsmRenderer::render`: encoding every pass and submitting.
     Render,
 }
-pub const PHASES: usize = 4;
+pub const PHASES: usize = 5;
 const PHASE_NAMES: [&str; PHASES] = [
+    "animations + particles",
     "read app state + interpolate",
     "set camera",
     "update transforms",

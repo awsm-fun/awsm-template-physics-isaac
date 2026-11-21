@@ -42,6 +42,18 @@ const CAMERA_FOV_Y_DEG: f32 = 55.0;
 const CAMERA_NEAR: f32 = 0.05;
 const CAMERA_FAR: f32 = 400.0;
 
+/// This template's anti-aliasing: 4× MSAA, no SMAA. The renderer is built
+/// with it AND it is written into the scene before the load, because
+/// `load_scene_for_player` applies the scene's authored setting
+/// (`post_process.anti_aliasing`): with the two agreeing, the loader keeps the
+/// renderer's and nothing compiles twice. To use what the bundle authored
+/// instead, drop the write in [`run`].
+const ANTI_ALIASING: awsm_renderer_scene::AntiAliasingConfig =
+    awsm_renderer_scene::AntiAliasingConfig {
+        msaa: true,
+        smaa: false,
+    };
+
 /// The live link between the pose block and the scene's robots.
 struct PoseLink {
     robots: Vec<RobotRing>,
@@ -165,8 +177,8 @@ async fn run(
 
     let mut renderer = AwsmRendererBuilder::new(gpu_builder)
         .with_anti_aliasing(awsm_renderer::anti_alias::AntiAliasing {
-            msaa_sample_count: Some(4),
-            smaa: false,
+            msaa_sample_count: ANTI_ALIASING.msaa.then_some(4),
+            smaa: ANTI_ALIASING.smaa,
             mipmap: true,
         })
         // GPU frame timing for the Stats panel's GPU group: timestamp queries
@@ -198,7 +210,10 @@ async fn run(
         futures::join!(renderer.ensure_config_pipelines(), fetch_scene(&scene_url));
     let compiled =
         compiled.map_err(|e| JsValue::from_str(&format!("ensure_config_pipelines: {e}")))?;
-    let scene = scene.map_err(|e| JsValue::from_str(&format!("load scene {scene_url}: {e}")))?;
+    let mut scene =
+        scene.map_err(|e| JsValue::from_str(&format!("load scene {scene_url}: {e}")))?;
+    // The loader applies the scene's anti-aliasing; make it this template's.
+    scene.post_process.anti_aliasing = ANTI_ALIASING;
     post_progress(&format!(
         "core pipelines ready ({compiled}) · scene parsed ({} nodes)",
         scene.nodes.len()
@@ -220,6 +235,10 @@ async fn run(
     )
     .await
     .map_err(|e| JsValue::from_str(&format!("load_scene_for_player: {e}")))?;
+
+    // The loader builds the scene's particle emitters; the host ticks them
+    // (as it does clips). Built before `loaded.mujoco` is moved out below.
+    let mut particles = awsm_renderer_scene_loader::ParticleDriver::new(&loaded);
 
     // Every robot is authored content: the loader already resolved each sim
     // instance's geom_id → transform binding out of the bundle.
@@ -298,7 +317,7 @@ async fn run(
     let raf_run = raf.clone();
     let mut frame_count: u32 = 0;
     // Presented frames and their timing, for the page's Stats panel.
-    // In 0.43 `gpu_timestamps` exists only once the GPU tier is on; the
+    // Since 0.43 `gpu_timestamps` exists only once the GPU tier is on; the
     // builder sets `gpu: Frame`, so here it is `Some` exactly when the device
     // has timestamp queries.
     let mut frame_window = crate::stats::FrameWindow::new(cell.borrow().gpu_timestamps.is_some());
@@ -306,6 +325,7 @@ async fn run(
     // The page clock every thread shares (absolute ms): pose samples and
     // camera states are stamped on it.
     let time_origin = crate::stats::worker_time_origin();
+    let mut prev_vsync: Option<f64> = None;
 
     *raf_init.borrow_mut() = Some(Closure::new(move |vsync_ms: f64| {
         let frame_start = crate::stats::worker_now();
@@ -326,6 +346,20 @@ async fn run(
 
         let frame_t = time_origin + vsync_ms;
         let period_ms = period.frame(vsync_ms);
+
+        // The scene's own motion: authored clips, texture UV flows and
+        // particle emitters, by this frame's real time step (0 on the first).
+        let frame_dt_ms = prev_vsync
+            .replace(vsync_ms)
+            .map_or(0.0, |prev| (vsync_ms - prev).max(0.0));
+        if let Err(err) = r.update_animations(frame_dt_ms) {
+            tracing::warn!("render thread: update_animations: {err}");
+        }
+        particles.tick(&mut r, (frame_dt_ms / 1000.0) as f32);
+        lap(&mut phases, Phase::Animate);
+
+        // Then the robots' poses, after the clips, so the poses win on the
+        // nodes they drive.
         let mut late = false;
         if let Some(l) = link.borrow_mut().as_mut() {
             late = apply_poses(&mut r, l, frame_t);

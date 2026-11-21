@@ -368,6 +368,13 @@ fn stats_tab() -> Vec<Dom> {
                 vec![text("The render thread's CPU time per frame.")],
             ),
             (
+                "animations + particles",
+                vec![text(
+                    "Advances the scene's authored clips, texture flows and particles by this \
+                 frame's time.",
+                )],
+            ),
+            (
                 "read app state + interpolate",
                 vec![text(
                     "Reads each robot's two pose samples around this frame's exact moment and \
