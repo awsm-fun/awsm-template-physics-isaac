@@ -135,7 +135,7 @@ and what it is per:
 | `GPU` | GPU time per frame (timestamp queries; `n/a` without them) | one row per pass, slowest first; on GPUs that overlap passes (Apple's) they add up to more than the frame |
 | `renderer (render worker)` | the render worker's CPU time per frame | its five phases (`animations + particles`, `read app state + interpolate`, `set camera`, `update transforms`, `render (encode + submit)`); under render, awsm-renderer's own CPU scopes as `prepare` (uploads, bind groups, …), `passes` and `submit`, each scope slowest first (those under 1 µs folded into one row), then `outside the scopes` |
 | `poses (replay, pose worker)` or `poses (live stream, pose worker)` | samples per second per robot | samples published, **late frames** (frames past a robot's newest sample, which held it: a stalled stream), dropped stream frames (stream only) |
-| `page (main thread)` | the main thread's own work per frame | its two animation-frame loops: `camera frame loop`, `refresh probe` |
+| `page (main thread)` | the main thread's own work per frame | `camera frame loop` |
 
 The simulation itself runs outside the page (or not at all, in replay), so
 the pose group shows only what the page can measure: there is no step time,
@@ -146,12 +146,25 @@ per-pass GPU numbers), so a collapsed group, or a hidden panel, costs nothing;
 an expanded one is timed on every frame. CPU and GPU work run in parallel, so
 each must fit the budget on its own; they do not add up, except when the CPU
 waits on the GPU, which shows as missed frames. Late frames that keep happening
-turn the pose group red. The panel is off by default and remembers its state;
-`?reset` forgets every stored setting. **Settings** (bottom right) holds the
-render resolution. **About** (bottom centre) says what the demo is and, on its
-Stats tab, what every number in the panel means (the panel's `what do these
-mean?` opens it there). The panel is `packages/frontend/src/stats.rs`, the
-About modal `packages/frontend/src/about.rs`.
+turn the pose group red. The panel is off by default and remembers its state.
+**Settings** (bottom right) holds the render resolution and the
+anti-aliasing: Off, SMAA, MSAA 4×, TAA, or TAA upscaling from 67%, 58% or 50%
+of the resolution (Quality, Balanced, Performance). TAA is the default on a
+desktop; a touch device or a software GPU starts with it off (and a lower
+resolution). `?aa=<mode>` (`off`, `smaa`, `msaa`, `taa`, `taa-quality`,
+`taa-balanced`, `taa-performance`) picks one for a single visit without
+storing it, and `?reset` forgets every stored setting. **About** (bottom
+centre) says what the demo is and, on its Stats tab, what every number in the
+panel means (the panel's `what do these mean?` opens it there).
+
+Settings and Stats come from
+[awsm-renderer-kit](https://github.com/awsm-fun/awsm-renderer-kit), shared by
+every awsm-renderer template: its `SettingsPanel` and `StatsPanel` on the
+main thread, and its stats collector and anti-aliasing switch in the render
+worker. What is this app's own is in `packages/frontend/src/stats.rs` (the
+frame phases and the pose group) and `packages/frontend/src/main_thread.rs`
+(where the panels mount, and the words); the About modal is
+`packages/frontend/src/about.rs`.
 
 ### Live stream, locally
 
@@ -170,7 +183,7 @@ sends the older wire form without step numbers, which the page also accepts.
 
 | thread | code | role |
 |---|---|---|
-| **Main** | `src/main_thread.rs` | DOM (Dominator), spawns both workers, brokers startup. The Stats panel is `src/stats.rs`. |
+| **Main** | `src/main_thread.rs` | DOM (Dominator), spawns both workers, brokers startup. The Settings and Stats panels are awsm-renderer-kit's; the app's stats group is `src/stats.rs`. |
 | **Render** | `src/render_thread.rs` | `awsm-renderer` on an `OffscreenCanvas`. Loads the player bundle, then each frame advances the scene's clips, texture flows and particles (`update_animations`, `ParticleDriver`), blends every robot's two samples around the frame time and applies the result with `scene_loader::mujoco::apply_geom_poses` (after the clips, so the poses win). |
 | **Pose worker** | `web/workers/pose-worker.js` | The pose *source*: replays captures or reads the socket, and publishes into a `SharedArrayBuffer` pose block. |
 
