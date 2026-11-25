@@ -6,8 +6,11 @@
 //!   render thread interpolates every robot at its frame time and hands the
 //!   result to the renderer's pose sink. The renderer knows nothing about Isaac, captures or sockets.
 //! - **main ↔ render worker**: small serde messages (progress, the scene's sim
-//!   instances, resize, the Stats report and which Stats groups are open)
-//!   and, once per main-thread frame while it moves, the camera state (see
+//!   instances), the settings and stats kit's messages (resize, the
+//!   anti-aliasing mode and its compile progress, the Stats report and which
+//!   Stats groups are open: plain objects with a `type`, see
+//!   awsm-renderer-settings and awsm-renderer-stats) and, once per
+//!   main-thread frame while it moves, the camera state (see
 //!   `crate::camera`).
 //! - **main ↔ pose worker**: raw JS objects (`{kind: ...}`) — see the worker.
 //!
@@ -166,62 +169,9 @@ pub enum RenderMsg {
     },
     /// First real frames have been presented.
     Ready,
-    /// About once a second, for the Stats panel (see `crate::stats`).
-    Stats(FrameReport),
     Error {
         message: String,
     },
-}
-
-/// The render worker's Stats report: one window of about a second.
-#[derive(Serialize, Deserialize, Debug, Clone, Default)]
-pub struct FrameReport {
-    /// Frames presented, and the time they covered (rAF timestamp to rAF
-    /// timestamp, pauses left out).
-    pub frames: u32,
-    pub span_ms: f64,
-    /// The render worker's CPU time for those frames (the whole frame function).
-    pub cpu_ms: f64,
-    /// Frames whose time was past a robot's newest sample, which held its
-    /// newest pose instead (the source stalled or fell behind).
-    pub late: u32,
-    /// Whether the device has timestamp queries (else no GPU numbers, ever).
-    pub gpu_available: bool,
-    /// Mean GPU time per frame over the window, when there was a sample.
-    pub gpu_ms: Option<f64>,
-    /// Only while the renderer group is open: the mean per frame of each of
-    /// the frame function's phases (`crate::stats::Phase` order), and of each
-    /// of awsm-renderer's CPU scopes inside `render()` (named as the renderer
-    /// names them; the panel groups them with `cpu_scope_kind`).
-    pub phases_ms: Option<[f64; crate::stats::PHASES]>,
-    pub cpu_scopes: Vec<(String, f64)>,
-    /// Only while the GPU group is open: the mean per frame of each GPU pass.
-    pub gpu_passes: Vec<(String, f64)>,
-    /// The pose block's running counters (header `frames` and `dropped`), and
-    /// the robots it feeds; zero until the block is linked.
-    pub robots: u32,
-    pub samples: u32,
-    pub dropped: u32,
-}
-
-/// Which Stats groups are open (and the panel shown): the render worker runs
-/// the extra timing for a group only then.
-#[derive(Serialize, Deserialize, Debug, Clone, Copy, Default, PartialEq, Eq)]
-pub struct Profile {
-    pub renderer: bool,
-    pub gpu: bool,
-}
-
-/// Main → render worker: see [`Profile`].
-#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
-pub enum ProfileMsg {
-    Set(Profile),
-}
-
-/// Main → render worker: canvas backing-store resize (device pixels).
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub enum ResizeMsg {
-    Canvas { width: u32, height: u32 },
 }
 
 #[cfg(test)]
